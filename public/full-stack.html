@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaishnu Vindula - System Architecture</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;700&family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="full-stack.css">
+</head>
+
+<body>
+
+    <!-- Grid Background -->
+    <div class="grid-bg"></div>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-link">
+        <i class="fas fa-arrow-left"></i> EXIT_SYSTEM
+    </a>
+
+    <!-- Main Interface -->
+    <main class="system-interface">
+
+        <header class="blueprint-header">
+            <h1 class="system-title">SYSTEM_ARCHITECTURE_V1.0</h1>
+            <div class="header-line"></div>
+            <p class="subtitle">FULL STACK DEVELOPMENT // DIGITAL INFRASTRUCTURE</p>
+        </header>
+
+        <section class="core-architecture">
+            <!-- 3D Tech Stack Visual -->
+            <div class="stack-container">
+                <div class="stack-visual">
+                    <!-- Database Layer -->
+                    <div class="layer database" data-layer="Data Persistence">
+                        <div class="face top"></div>
+                        <div class="face front">
+                            <i class="fas fa-database"></i> SQL / NoSQL
+                        </div>
+                        <div class="face right"></div>
+                        <div class="layer-content">
+                            <span>PostgreSQL</span>
+                            <span>MongoDB</span>
+                            <span>Redis</span>
+                        </div>
+                    </div>
+
+                    <!-- Backend Layer -->
+                    <div class="layer backend" data-layer="Server Logic">
+                        <div class="face top"></div>
+                        <div class="face front">
+                            <i class="fas fa-server"></i> BACKEND
+                        </div>
+                        <div class="face right"></div>
+                        <div class="layer-content">
+                            <span>Node.js</span>
+                            <span>Python / Django</span>
+                            <span>Go</span>
+                        </div>
+                    </div>
+
+                    <!-- API / Interface Layer -->
+                    <div class="layer api" data-layer="Interface">
+                        <div class="face top"></div>
+                        <div class="face front">
+                            <i class="fas fa-network-wired"></i> API / REST
+                        </div>
+                        <div class="face right"></div>
+                        <div class="layer-content">
+                            <span>GraphQL</span>
+                            <span>RESTful APIs</span>
+                            <span>WebSockets</span>
+                        </div>
+                    </div>
+
+                    <!-- Frontend Layer -->
+                    <div class="layer frontend" data-layer="Client Side">
+                        <div class="face top"></div>
+                        <div class="face front">
+                            <i class="fas fa-desktop"></i> FRONTEND
+                        </div>
+                        <div class="face right"></div>
+                        <div class="layer-content">
+                            <span>React.js</span>
+                            <span>Next.js</span>
+                            <span>TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project Schematics -->
+            <div class="schematics-grid">
+                <!-- Schematic 1 -->
+                <div class="schematic-card">
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
+
+                    <div class="schematic-header">
+                        <span class="file-id">PRJ_001</span>
+                        <h3>UniAutomation</h3>
+                    </div>
+                    <p class="summary">Centralized automation platform to manage workflows and eliminate manual intervention across university websites and apps. React dashboard for live monitoring; FastAPI backend handles workflow orchestration, alert triggers, and automated task execution.</p>
+
+                    <div class="specs">
+                        <div class="spec-row">
+                            <span class="label">FRONT:</span>
+                            <span class="value">React</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="label">BACK:</span>
+                            <span class="value">FastAPI</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="label">DB:</span>
+                            <span class="value">MySQL</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-schematic">VIEW_BLUEPRINT</a>
+                </div>
+
+                <!-- Schematic 2 -->
+                <div class="schematic-card">
+                    <div class="corner tl"></div>
+                    <div class="corner tr"></div>
+                    <div class="corner bl"></div>
+                    <div class="corner br"></div>
+
+                    <div class="schematic-header">
+                        <span class="file-id">PRJ_002</span>
+                        <h3>Mill Roll Mgmt</h3>
+                    </div>
+                    <p class="summary">Industrial inventory tracking system for Vizag Steel Plant.</p>
+
+                    <div class="specs">
+                        <div class="spec-row">
+                            <span class="label">ARCH:</span>
+                            <span class="value">Monolithic (MVC)</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="label">stack:</span>
+                            <span class="value">Java / Oracle DB</span>
+                        </div>
+                        <div class="spec-row">
+                            <span class="label">uptime:</span>
+                            <span class="value">99.9%</span>
+                        </div>
+                    </div>
+
+                    <a href="#" class="btn-schematic">VIEW_BLUEPRINT</a>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Simple Interaction logic for layers
+        document.querySelectorAll('.layer').forEach(layer => {
+            layer.addEventListener('mouseenter', () => {
+                document.querySelectorAll('.layer').forEach(l => {
+                    if (l !== layer) l.style.opacity = '0.5';
+                });
+            });
+            layer.addEventListener('mouseleave', () => {
+                document.querySelectorAll('.layer').forEach(l => {
+                    l.style.opacity = '1';
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

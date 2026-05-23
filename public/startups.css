@@ -1,0 +1,325 @@
+/* Startup Launch Page Styles */
+
+/* Initial State */
+html,
+body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    width: 100%;
+}
+
+body {
+    background-color: var(--bg-color);
+    /* Matches main theme */
+    transition: background-color 1.5s ease;
+    overflow-x: hidden;
+    position: relative;
+}
+
+body.space-theme {
+    background: radial-gradient(ellipse at bottom, #1b2735 0%, #090a0f 100%);
+    background-attachment: fixed;
+    overflow-y: auto;
+}
+
+/* Back Button */
+.back-btn {
+    position: fixed;
+    top: 30px;
+    left: 30px;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-weight: 500;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    color: var(--accent);
+    transform: translateX(-5px);
+}
+
+/* Launch Screen */
+#launch-screen {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    transition: opacity 0.5s ease;
+}
+
+.launch-content {
+    text-align: center;
+}
+
+.launch-title {
+    font-size: 3rem;
+    margin-bottom: 40px;
+    background: linear-gradient(135deg, #fff 0%, #a5b4fc 100%);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.launch-btn {
+    padding: 20px 40px;
+    font-size: 1.2rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    background: transparent;
+    color: var(--accent);
+    border: 2px solid var(--accent);
+    border-radius: 50px;
+    cursor: pointer;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+    overflow: hidden;
+}
+
+.launch-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    transition: left 0.4s ease;
+    z-index: -1;
+}
+
+.launch-btn:hover {
+    color: #fff;
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.4);
+}
+
+.launch-btn:hover::before {
+    left: 0;
+}
+
+/* Rocket Animation */
+#rocket-container {
+    position: fixed;
+    bottom: -150px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 200;
+    pointer-events: none;
+}
+
+#rocket-container.launching {
+    animation: rocketLaunch 2.5s ease-in forwards;
+}
+
+.rocket {
+    width: 80px;
+    height: auto;
+    filter: drop-shadow(0 0 10px rgba(255, 165, 0, 0.5));
+}
+
+.exhaust-flame {
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 40px;
+    height: 60px;
+    background: linear-gradient(to bottom, transparent 0%, #ff9a00 40%, #ff0000 100%);
+    border-radius: 50% 50% 30% 30%;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+
+#rocket-container.launching .exhaust-flame {
+    animation: flamePulse 0.1s infinite alternate;
+    opacity: 1;
+}
+
+@keyframes rocketLaunch {
+    0% {
+        bottom: -150px;
+        transform: translateX(-50%) scale(1);
+    }
+
+    10% {
+        bottom: 20px;
+    }
+
+    100% {
+        bottom: 120vh;
+        transform: translateX(-50%) scale(0.8);
+    }
+}
+
+@keyframes flamePulse {
+    0% {
+        height: 60px;
+        width: 40px;
+        opacity: 0.8;
+    }
+
+    100% {
+        height: 80px;
+        width: 35px;
+        opacity: 1;
+    }
+}
+
+/* Star Background (CSS Only) */
+.stars,
+.stars2,
+.stars3 {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 2s ease;
+    z-index: -1;
+}
+
+body.space-theme .stars,
+body.space-theme .stars2,
+body.space-theme .stars3 {
+    opacity: 1;
+}
+
+/* Helper to generate random stars via shadow */
+.stars {
+    background: transparent;
+    box-shadow: 1744px 122px #FFF, 134px 1321px #FFF, 92px 859px #FFF;
+    animation: animStar 50s linear infinite;
+}
+
+.stars:after {
+    content: " ";
+    position: absolute;
+    top: 2000px;
+    width: 1px;
+    height: 1px;
+    background: transparent;
+    box-shadow: 1744px 122px #FFF, 134px 1321px #FFF, 92px 859px #FFF;
+}
+
+/* ... (Ideally we'd use a SCSS loop, but for raw CSS I'll use a simplified stars effect or just reliance on the gradient for now to save space, but let's add a few manual stars for effect) */
+.stars {
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0, 0, 0, 0)),
+        radial-gradient(2px 2px at 130px 80px, #fff, rgba(0, 0, 0, 0));
+    background-repeat: repeat;
+    background-size: 200px 200px;
+}
+
+/* Startup Content */
+#startup-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 1s ease-in;
+    padding-top: 100px;
+}
+
+#startup-content.visible {
+    opacity: 1;
+}
+
+.startup-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 40px;
+    margin-top: 40px;
+}
+
+.startup-card {
+    padding: 40px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(16, 24, 45, 0.7);
+    backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.startup-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--accent);
+    box-shadow: 0 0 30px rgba(6, 182, 212, 0.15);
+}
+
+.startup-icon {
+    font-size: 3rem;
+    color: var(--accent);
+    margin-bottom: 25px;
+}
+
+.startup-card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #fff;
+    font-family: 'Outfit', sans-serif;
+}
+
+.startup-desc {
+    color: #cbd5e1;
+    line-height: 1.7;
+    margin-bottom: 30px;
+    font-size: 1.05rem;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: auto;
+}
+
+.status-badge {
+    padding: 6px 14px;
+    background: rgba(37, 99, 235, 0.2);
+    color: #60a5fa;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    border: 1px solid rgba(37, 99, 235, 0.4);
+}
+
+.explore-btn {
+    text-decoration: none;
+    color: #fff;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: gap 0.3s;
+}
+
+.explore-btn:hover {
+    gap: 12px;
+    color: var(--accent);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .launch-title {
+        font-size: 2rem;
+    }
+
+    .startup-grid {
+        grid-template-columns: 1fr;
+    }
+}

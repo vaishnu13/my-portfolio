@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vaishnu Vindula - Startups</title>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700&family=Space+Grotesk:wght@300;400;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="startups.css">
+</head>
+
+<body>
+
+    <!-- Back Button -->
+    <a href="index.html" class="back-btn">
+        <i class="fas fa-arrow-left"></i> Back to Earth
+    </a>
+
+    <!-- Launch Screen -->
+    <section id="launch-screen">
+        <div class="launch-content">
+            <h1 class="launch-title">Ready for Liftoff?</h1>
+            <button id="launch-btn" class="launch-btn">INITIATE LAUNCH</button>
+        </div>
+    </section>
+
+    <!-- Rocket Container -->
+    <div id="rocket-container">
+        <!-- SVG Rocket -->
+        <svg class="rocket" viewBox="0 0 512 512" width="100" height="100">
+            <path d="M283.2,34.8c-12.5-17.4-38.3-17.6-50.8-0.6L201,75.2c-5.2,7.1-7,16.2-4.9,24.8l17.7,71.7l-47.5,19l-72.2-4.7
+                c-8.7-0.6-17.2,3.3-22.3,10.4l-35.7,49.5c-8.6,11.9-4.8,28.7,8.3,35.6l87.5,46.1c5.8,3,9.5,9,9.5,15.6v23.2
+                c0,16.2,12.7,29.6,28.9,30.5l98.5,5.4c16.2,0.9,29.6-11.3,30.5-27.5l0.9-16.4c0.4-6.4,3.8-12.3,9.4-15.6l93-55.6
+                c12.2-7.3,15.2-23.7,6-34.9l-42.3-51.5c-5.8-7-14.9-10.4-23.9-8.9l-72.2,11.9l-38.6-26.6l17.1-66.7c2.2-8.5,0.7-17.5-4.2-24.8
+                L283.2,34.8z" fill="#e94560" />
+            <path d="M260.4,498.8c-26.5,0-48-21.5-48-48s21.5-48,48-48s48,21.5,48,48S286.9,498.8,260.4,498.8z"
+                fill="#fca311" />
+            <path d="M260.4,458.8c-15.5,0-28-12.5-28-28s12.5-28,28-28s28,12.5,28,28S275.9,458.8,260.4,458.8z"
+                fill="#ffffff" opacity="0.5" />
+            <path d="M256,128c-17.7,0-32,14.3-32,32s14.3,32,32,32s32-14.3,32-32S273.7,128,256,128z" fill="#2d3748" />
+        </svg>
+        <div class="exhaust-flame"></div>
+    </div>
+
+    <!-- Startup Content (Hidden Initially) -->
+    <section id="startup-content">
+        <div class="container">
+            <h2 class="section-title">My Venture Ecosystem</h2>
+
+            <div class="startup-grid">
+                <!-- Startup 1 -->
+                <div class="startup-card glass-card">
+                    <div class="card-glow"></div>
+                    <div class="startup-icon">
+                        <i class="fas fa-database"></i>
+                    </div>
+                    <h3>Bharat Data</h3>
+                    <p class="startup-desc">India's central data hub, bringing all critical information into a single,
+                        accessible platform. Empowering decisions with unified intelligence.</p>
+                    <div class="card-footer">
+                        <span class="status-badge">Live Beta</span>
+                        <a href="#" class="explore-btn">Explore Data <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Startup 2 -->
+                <div class="startup-card glass-card">
+                    <div class="card-glow"></div>
+                    <div class="startup-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <h3>Family Ecosystem App</h3>
+                    <p class="startup-desc">A private, custom-built mobile application designed to streamline
+                        communication, finance, and utility management for my family.</p>
+                    <div class="card-footer">
+                        <span class="status-badge">Private Access</span>
+                        <a href="#" class="explore-btn">View Demo <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Star Background (Generated via CSS) -->
+    <div class="stars"></div>
+    <div class="stars2"></div>
+    <div class="stars3"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const launchBtn = document.getElementById('launch-btn');
+            const rocketContainer = document.getElementById('rocket-container');
+            const launchScreen = document.getElementById('launch-screen');
+            const startupContent = document.getElementById('startup-content');
+            const body = document.body;
+
+            launchBtn.addEventListener('click', () => {
+                // 1. Trigger Space Theme
+                body.classList.add('space-theme');
+
+                // 2. Hide Button
+                launchScreen.style.opacity = '0';
+                setTimeout(() => {
+                    launchScreen.style.display = 'none';
+                }, 500);
+
+                // 3. Launch Rocket
+                rocketContainer.classList.add('launching');
+
+                // 4. Show Startups after rocket leaves (1.5s delay)
+                setTimeout(() => {
+                    startupContent.style.display = 'block';
+                    // Trigger reflow
+                    void startupContent.offsetWidth;
+                    startupContent.classList.add('visible');
+                }, 1500);
+            });
+        });
+    </script>
+</body>
+
+</html>
