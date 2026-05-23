@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { Magnet } from './components/Magnet';
 import { FadeIn } from './components/FadeIn';
 import { ContactButton } from './components/Buttons';

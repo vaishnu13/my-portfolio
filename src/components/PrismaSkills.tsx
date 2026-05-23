@@ -1,24 +1,4 @@
-import { useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
-import { Check, ArrowRight } from 'lucide-react';
 import { WordsPullUpMultiStyle } from './PrismaComponents';
-
-function FeatureCard({ children, delay = 0, className = "" }: { children: React.ReactNode, delay?: number, className?: string }) {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  return (
-    <motion.div
-      ref={ref}
-      initial={{ scale: 0.95, opacity: 0 }}
-      animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.95, opacity: 0 }}
-      transition={{ duration: 0.8, delay, ease: [0.22, 1, 0.36, 1] }}
-      className={`rounded-2xl md:rounded-[2rem] overflow-hidden relative ${className}`}
-    >
-      {children}
-    </motion.div>
-  );
-}
 
 export function PrismaSkills() {
   return (
