@@ -25,7 +25,12 @@ export function PreviousSections() {
       <div id="particles-js"></div>
       
       {/* Stats / Quick Info Section */}
-      <section className="stats-section pt-32 relative z-10" style={{ background: 'var(--bg-color)' }}>
+      <section className="stats-section pt-32 relative z-10 bg-black">
+        <div className="container mb-20 sm:mb-24 text-center flex justify-center" data-aos="fade-up">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-[2.5rem] font-semibold text-white max-w-5xl leading-snug sm:leading-tight">
+            Innovative developer building <span className="text-[#06b6d4]">AI-driven solutions</span> using LLMs, cloud technologies, and modern web frameworks.
+          </h2>
+        </div>
         <div className="container stats-grid">
             <a href="full-stack.html" className="stat-item glass-card" data-aos="fade-up" data-aos-delay="0">
                 <div className="stat-icon"><i className="fas fa-code"></i></div>
@@ -46,7 +51,7 @@ export function PreviousSections() {
       </section>
 
       {/* Experience Section */}
-      <section id="experience" className="section relative z-10" style={{ background: 'var(--bg-color)' }}>
+      <section id="experience" className="section relative z-10 bg-black">
           <div className="container">
               <h2 className="section-title" data-aos="fade-up">Experience</h2>
               <div className="timeline">
@@ -86,7 +91,7 @@ export function PreviousSections() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="section relative z-10" style={{ background: 'var(--bg-color)' }}>
+      <section id="projects" className="section relative z-10 bg-black">
           <div className="container">
               <h2 className="section-title" data-aos="fade-up">Featured Projects</h2>
 
@@ -134,7 +139,7 @@ export function PreviousSections() {
       {/* Prisma Contact Section */}
       <PrismaContact />
 
-      <footer className="relative z-10" style={{ background: 'var(--bg-color)' }}>
+      <footer className="relative z-10 bg-black">
           <div className="container footer-content">
               <p>&copy; 2025 Vaishnu Vindula. Built with <i className="fas fa-heart"></i> and Code.</p>
               <div className="social-links">

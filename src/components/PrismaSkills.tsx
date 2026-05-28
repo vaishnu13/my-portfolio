@@ -17,15 +17,9 @@ export function PrismaSkills() {
       <div className="relative z-10 flex flex-col items-center text-center px-4 sm:px-6 md:px-8">
         <WordsPullUpMultiStyle 
           segments={[
-            { text: "Technical Skills & Workflows.", className: "text-[#E1E0CC]" }
+            { text: "POWERED BY VAISHNU", className: "text-[#E1E0CC]" }
           ]}
-          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4"
-        />
-        <WordsPullUpMultiStyle 
-          segments={[
-            { text: "Powered by Vaishnu.", className: "text-gray-300" }
-          ]}
-          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-normal"
+          className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 uppercase"
         />
       </div>
     </section>

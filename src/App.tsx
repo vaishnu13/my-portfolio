@@ -92,26 +92,7 @@ export default function App() {
         </FadeIn>
       </section>
 
-      {/* 2. MARQUEE SECTION */}
-      <section id="marquee-section" className="pt-24 sm:pt-32 md:pt-40 pb-10 bg-[#0C0C0C] overflow-hidden flex flex-col gap-3">
-        <div 
-          className="flex gap-3 w-max"
-          style={{ transform: `translateX(${scrollOffset - 200}px)`, willChange: 'transform' }}
-        >
-          {row1.map((src, i) => (
-            <img key={i} src={src} className="w-[420px] h-[270px] rounded-2xl object-cover" loading="lazy" alt="" />
-          ))}
-        </div>
-        <div 
-          className="flex gap-3 w-max"
-          style={{ transform: `translateX(${-(scrollOffset - 200)}px)`, willChange: 'transform' }}
-        >
-          {row2.map((src, i) => (
-            <img key={i} src={src} className="w-[420px] h-[270px] rounded-2xl object-cover" loading="lazy" alt="" />
-          ))}
-        </div>
-      </section>
-
+      <div className="bg-black h-32 md:h-64 w-full z-20 relative"></div>
       {/* 3. PREVIOUS SECTIONS */}
       <PreviousSections />
     </div>
