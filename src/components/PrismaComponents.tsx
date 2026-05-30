@@ -50,9 +50,9 @@ export function WordsPullUpMultiStyle({
   let wordIndex = 0;
 
   return (
-    <div ref={ref} className={`inline-flex flex-wrap justify-center ${className}`}>
+    <div ref={ref} className={`flex flex-wrap justify-center gap-x-[0.25em] gap-y-[0.2em] ${className}`}>
       {segments.map((segment, segIdx) => {
-        const words = segment.text.split(" ");
+        const words = segment.text.split(" ").filter(w => w.trim() !== "");
         return words.map((word, i) => {
           const currentIdx = wordIndex++;
           return (
@@ -61,7 +61,7 @@ export function WordsPullUpMultiStyle({
               initial={{ y: 20, opacity: 0 }}
               animate={isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
               transition={{ delay: currentIdx * 0.08, duration: 0.6, ease: [0.16, 1, 0.3, 1] }}
-              className={`inline-block mr-2 sm:mr-3 md:mr-4 ${segment.className || ""}`}
+              className={`inline-block ${segment.className || ""}`}
             >
               {word}
             </motion.span>
