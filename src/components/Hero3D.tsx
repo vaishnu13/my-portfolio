@@ -1,7 +1,6 @@
 import { useViewportTilt } from '../hooks/useTilt';
 import { FadeIn } from './FadeIn';
 import { ContactButton } from './Buttons';
-import { Magnet } from './Magnet';
 
 export function Hero3D() {
   const { tilt, onMouseMove, onMouseLeave } = useViewportTilt(6);
@@ -131,21 +130,6 @@ export function Hero3D() {
           </FadeIn>
         </div>
       </div>
-
-      {/* Profile image — sits outside tilt wrapper */}
-      <FadeIn delay={0.7} className="absolute left-1/2 -translate-x-1/2 z-10 bottom-0 sm:bottom-0 pointer-events-none">
-        <div className="relative">
-          {/* Glow ring behind image */}
-          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-blue-600/20 via-purple-600/10 to-transparent blur-2xl" />
-          <Magnet strength={2}>
-            <img
-              src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
-              alt="Vaishnu Vindula"
-              className="w-[260px] sm:w-[340px] md:w-[420px] lg:w-[500px] object-contain drop-shadow-[0_0_60px_rgba(37,99,235,0.3)]"
-            />
-          </Magnet>
-        </div>
-      </FadeIn>
 
       {/* Bottom gradient fade */}
       <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#030305] to-transparent pointer-events-none" />
