@@ -4,87 +4,151 @@ import { ContactButton } from './Buttons';
 import { Magnet } from './Magnet';
 
 export function Hero3D() {
-  const { tilt, onMouseMove, onMouseLeave } = useViewportTilt(8);
+  const { tilt, onMouseMove, onMouseLeave } = useViewportTilt(6);
 
   return (
     <section
-      className="relative min-h-screen bg-[#050505] overflow-hidden"
+      className="relative min-h-screen bg-[#030305] overflow-hidden flex flex-col"
       onMouseMove={onMouseMove}
       onMouseLeave={onMouseLeave}
     >
-      {/* Background floating orbs */}
-      <div className="orb absolute w-[400px] h-[400px] rounded-full bg-blue-500/30 blur-3xl top-[10%] left-[5%]" style={{ animation: 'float-slow 8s ease-in-out infinite' }} />
-      <div className="orb absolute w-[300px] h-[300px] rounded-full bg-purple-500/20 blur-3xl bottom-[15%] right-[10%]" style={{ animation: 'float-medium 10s ease-in-out infinite' }} />
-      <div className="orb absolute w-[200px] h-[200px] rounded-full bg-cyan-500/20 blur-3xl top-[40%] right-[25%]" style={{ animation: 'float-slow 12s ease-in-out infinite alternate' }} />
+      {/* ── GLOWING GRID FLOOR ── */}
+      <div className="absolute bottom-0 left-0 right-0 h-[55%] grid-floor pointer-events-none" />
 
-      {/* Star field overlay */}
+      {/* ── AURORA RINGS ── */}
+      <div
+        className="aurora-ring absolute w-[600px] h-[600px] -top-64 -left-64 opacity-30"
+        style={{ borderWidth: '1px' }}
+      />
+      <div
+        className="aurora-ring absolute w-[400px] h-[400px] -bottom-40 -right-40 opacity-20"
+        style={{ borderWidth: '1px', animationDirection: 'reverse', animationDuration: '18s' }}
+      />
+
+      {/* ── FLOATING ORBS ── */}
+      <div className="orb w-[500px] h-[500px] bg-blue-600/40 top-[-8%] left-[-5%]"
+        style={{ animation: 'float-slow 9s ease-in-out infinite' }} />
+      <div className="orb w-[350px] h-[350px] bg-purple-600/30 bottom-[10%] right-[-5%]"
+        style={{ animation: 'float-medium 11s ease-in-out infinite' }} />
+      <div className="orb w-[250px] h-[250px] bg-cyan-500/25 top-[35%] right-[20%]"
+        style={{ animation: 'float-slow 13s ease-in-out infinite alternate' }} />
+      <div className="orb w-[180px] h-[180px] bg-violet-500/20 top-[60%] left-[15%]"
+        style={{ animation: 'float-fast 7s ease-in-out infinite' }} />
+
+      {/* ── STAR FIELD ── */}
       <div className="absolute inset-0 star-field pointer-events-none" />
 
-      {/* Noise overlay */}
-      <div className="absolute inset-0 bg-noise opacity-[0.03] pointer-events-none" />
+      {/* ── SCAN LINE ── */}
+      <div className="absolute inset-0 scan-line pointer-events-none opacity-40" />
 
-      {/* 3D tilt wrapper */}
+      {/* ── NOISE ── */}
+      <div className="absolute inset-0 bg-noise opacity-[0.04] pointer-events-none mix-blend-overlay" />
+
+      {/* ── 3D TILT WRAPPER ── */}
       <div
-        className="relative z-20 flex flex-col min-h-screen px-6 sm:px-10 md:px-16 lg:px-20"
+        className="relative z-20 flex flex-col flex-1 px-6 sm:px-10 md:px-16 lg:px-24"
         style={{
-          transform: `perspective(1200px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
-          transition: 'transform 400ms cubic-bezier(0.03, 0.98, 0.52, 0.99)',
+          transform: `perspective(1400px) rotateX(${tilt.y}deg) rotateY(${tilt.x}deg)`,
+          transition: 'transform 500ms cubic-bezier(0.03, 0.98, 0.52, 0.99)',
           willChange: 'transform',
+          transformStyle: 'preserve-3d',
         }}
       >
         {/* Navigation */}
-        <FadeIn delay={0} y={-20}>
-          <nav className="flex items-center justify-between py-6 text-white/70 text-sm tracking-wide">
-            <a href="#" className="hover:text-white transition-colors duration-300">
-              Home
-            </a>
-            <a href="#work" className="hover:text-white transition-colors duration-300">
-              Work
-            </a>
-            <a href="#experience" className="hover:text-white transition-colors duration-300">
-              Experience
-            </a>
-            <a href="#contact" className="hover:text-white transition-colors duration-300">
-              Contact
-            </a>
+        <FadeIn delay={0} y={-25}>
+          <nav className="flex items-center justify-between py-7 text-white/50 text-sm font-light tracking-[0.18em] uppercase">
+            <span className="text-white/80 font-bold tracking-widest text-xs">VV</span>
+            <div className="flex gap-10">
+              {['Work', 'Experience', 'Contact'].map((item) => (
+                <a
+                  key={item}
+                  href={`#${item.toLowerCase()}`}
+                  className="hover:text-white transition-colors duration-300 relative group"
+                >
+                  {item}
+                  <span className="absolute -bottom-1 left-0 w-0 h-px bg-gradient-to-r from-blue-400 to-purple-400 group-hover:w-full transition-all duration-300" />
+                </a>
+              ))}
+            </div>
           </nav>
         </FadeIn>
 
-        {/* Center content — massive heading */}
-        <div className="flex-1 flex items-center justify-center">
+        {/* Center content */}
+        <div className="flex-1 flex flex-col items-center justify-center -mt-8 relative">
+
+          {/* Subtle badge */}
+          <FadeIn delay={0.08}>
+            <div className="mb-6 inline-flex items-center gap-2 px-4 py-1.5 rounded-full border border-blue-500/25 bg-blue-500/8 backdrop-blur-sm">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-xs text-blue-200/70 tracking-widest uppercase font-light">Full Stack Developer & AI Engineer</span>
+            </div>
+          </FadeIn>
+
+          {/* MASSIVE 3D HEADING */}
           <FadeIn delay={0.15}>
-            <h1 className="text-3d font-black uppercase tracking-tight text-[14vw] sm:text-[15vw] md:text-[16vw] lg:text-[17.5vw] leading-none whitespace-nowrap text-white">
+            <h1
+              className="text-3d font-black uppercase tracking-tight leading-none whitespace-nowrap select-none text-[12vw] sm:text-[13vw] md:text-[14.5vw] lg:text-[16vw]"
+              style={{ transform: 'translateZ(60px)', transformStyle: 'preserve-3d' }}
+            >
               I'M VAISHNU
             </h1>
           </FadeIn>
-        </div>
 
-        {/* Bottom row: tagline left, contact button right */}
-        <div className="flex items-end justify-between pb-10 gap-6">
-          {/* Bottom left tagline */}
-          <FadeIn delay={0.35}>
-            <p className="max-w-xs text-white/60 text-sm leading-relaxed">
-              a full stack developer driven by crafting scalable and unforgettable digital experiences
+          {/* Sub-line */}
+          <FadeIn delay={0.28}>
+            <p className="mt-6 text-center text-white/30 text-sm sm:text-base font-light tracking-[0.25em] uppercase">
+              Crafting Scalable &amp; Unforgettable Digital Experiences
             </p>
           </FadeIn>
 
-          {/* Bottom right contact button */}
+          {/* Scrolling marquee of tags */}
+          <FadeIn delay={0.38}>
+            <div className="mt-8 overflow-hidden w-[min(700px,90vw)]">
+              <div className="flex gap-3 whitespace-nowrap"
+                style={{ animation: 'marquee 20s linear infinite' }}>
+                {['React', 'Next.js', 'TypeScript', 'Python', 'Node.js', 'AI/ML', 'LLMs', 'AWS', 'PostgreSQL', 'React', 'Next.js', 'TypeScript', 'Python', 'Node.js', 'AI/ML', 'LLMs', 'AWS', 'PostgreSQL'].map((tag, i) => (
+                  <span key={i} className="px-3 py-1 text-xs rounded-full border border-white/10 bg-white/[0.03] text-white/40 shrink-0">
+                    {tag}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </FadeIn>
+        </div>
+
+        {/* Bottom row */}
+        <div className="flex items-end justify-between pb-12 gap-6 relative z-10">
           <FadeIn delay={0.5}>
+            <div className="flex flex-col gap-2">
+              <p className="text-white/25 text-xs tracking-widest uppercase">Based in India</p>
+              <p className="max-w-[220px] text-white/50 text-xs leading-relaxed font-light">
+                Building tomorrow's web, today — full stack to AI-powered.
+              </p>
+            </div>
+          </FadeIn>
+          <FadeIn delay={0.6}>
             <ContactButton />
           </FadeIn>
         </div>
       </div>
 
-      {/* Center profile image */}
-      <FadeIn delay={0.6}>
-        <Magnet>
-          <img
-            src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
-            alt="Vaishnu Vindula"
-            className="absolute left-1/2 -translate-x-1/2 z-10 top-1/2 -translate-y-1/2 sm:top-auto sm:translate-y-0 sm:bottom-0"
-          />
-        </Magnet>
+      {/* Profile image — sits outside tilt wrapper */}
+      <FadeIn delay={0.7} className="absolute left-1/2 -translate-x-1/2 z-10 bottom-0 sm:bottom-0 pointer-events-none">
+        <div className="relative">
+          {/* Glow ring behind image */}
+          <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-blue-600/20 via-purple-600/10 to-transparent blur-2xl" />
+          <Magnet strength={2}>
+            <img
+              src="https://shrug-person-78902957.figma.site/_components/v2/d24c01ad3a56fc65e942a1f501eb73db42d7cf9a/Rectangle_40443.81459862.png"
+              alt="Vaishnu Vindula"
+              className="w-[260px] sm:w-[340px] md:w-[420px] lg:w-[500px] object-contain drop-shadow-[0_0_60px_rgba(37,99,235,0.3)]"
+            />
+          </Magnet>
+        </div>
       </FadeIn>
+
+      {/* Bottom gradient fade */}
+      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-[#030305] to-transparent pointer-events-none" />
     </section>
   );
 }

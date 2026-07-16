@@ -6,7 +6,7 @@ import { PrismaSkills } from './components/PrismaSkills';
 
 export default function App() {
   return (
-    <div className="overflow-x-clip bg-[#050505] text-[#D7E2EA] font-sans">
+    <div className="overflow-x-clip bg-[#030305] text-[#D7E2EA] font-sans">
       
       {/* 1. HERO — 3D Immersive Intro */}
       <Hero3D />
@@ -24,7 +24,7 @@ export default function App() {
       <PrismaSkills />
 
       {/* Footer */}
-      <footer className="relative z-10 bg-[#050505] border-t border-white/5">
+      <footer className="relative z-10 bg-[#030305] border-t border-white/5">
         <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-center gap-4">
           <p className="text-white/30 text-sm">
             &copy; 2025 Vaishnu Vindula. Built with <i className="fas fa-heart text-purple-400/60"></i> and Code.
