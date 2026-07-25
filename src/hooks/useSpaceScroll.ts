@@ -40,8 +40,8 @@ export function useSpaceScroll() {
     (start: number, end: number, fadeDuration = 0.04) => {
       if (progress < start || progress > end) return 0;
 
-      // Fade in
-      if (progress < start + fadeDuration) {
+      // Fade in (only if start > 0)
+      if (start > 0 && progress < start + fadeDuration) {
         return (progress - start) / fadeDuration;
       }
       // Fade out

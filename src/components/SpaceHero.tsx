@@ -28,7 +28,7 @@ export const SpaceHero: React.FC<SpaceHeroProps> = ({ opacity }) => {
     >
       {/* Navigation */}
       <nav className="w-full flex justify-between items-center max-w-7xl mx-auto font-['Kanit'] tracking-widest text-sm md:text-base text-[#8C8684]">
-        <div className="font-bold text-[#E6E1DF] tracking-widest">VV</div>
+        <div className="font-bold text-[#E6E1DF] tracking-widest text-lg">VV</div>
         <div className="flex gap-6 md:gap-12">
           <a href="#work" className="hover:text-white transition-colors">WORK</a>
           <a href="#about" className="hover:text-white transition-colors">ABOUT</a>
@@ -36,43 +36,25 @@ export const SpaceHero: React.FC<SpaceHeroProps> = ({ opacity }) => {
         </div>
       </nav>
 
-      {/* Main Content */}
-      <div className="flex-1 w-full flex flex-col-reverse md:flex-row items-center justify-center max-w-7xl mx-auto gap-12 md:gap-24">
+      {/* Main Content — Centered, Neat, Ultra Bold Name (No Photo) */}
+      <div className="flex-1 w-full flex flex-col items-center justify-center text-center max-w-6xl mx-auto space-y-6">
+        <h1 className="font-['Kanit'] font-black text-6xl md:text-8xl lg:text-[9rem] leading-none uppercase tracking-tighter text-dungyov-3d">
+          Vaishnu Vindula
+        </h1>
         
-        {/* Left Side: Text */}
-        <div className="flex-1 flex flex-col items-start justify-center text-left space-y-6">
-          <h1 className="font-['Kanit'] font-black text-5xl md:text-7xl lg:text-[8rem] leading-none uppercase tracking-tighter text-dungyov-3d">
-            Vaishnu
-            <br />
-            Vindula
-          </h1>
-          
-          <div className="h-12 relative overflow-hidden flex items-center w-full">
-            <AnimatePresence mode="wait">
-              <motion.p
-                key={currentRole}
-                initial={{ y: 20, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -20, opacity: 0 }}
-                transition={{ duration: 0.5, ease: "easeOut" }}
-                className="font-['Instrument_Serif'] text-2xl md:text-4xl text-[#38bdf8] italic absolute"
-              >
-                {ROLES[currentRole]}
-              </motion.p>
-            </AnimatePresence>
-          </div>
-        </div>
-
-        {/* Right Side: Image */}
-        <div className="relative flex items-center justify-center">
-          <div className="absolute inset-0 bg-[#38bdf8]/20 rounded-full blur-[60px] animate-pulse"></div>
-          <div className="relative w-48 h-48 md:w-80 md:h-80 rounded-full border border-gray-700/50 bg-[#121010] shadow-[0_0_30px_rgba(56,189,248,0.2)] flex items-center justify-center overflow-hidden">
-             <img 
-               src="/images/profile.png" 
-               alt="Vaishnu Vindula" 
-               className="w-full h-full object-cover object-center grayscale hover:grayscale-0 transition-all duration-700"
-             />
-          </div>
+        <div className="h-12 relative overflow-hidden flex items-center justify-center w-full">
+          <AnimatePresence mode="wait">
+            <motion.p
+              key={currentRole}
+              initial={{ y: 20, opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              exit={{ y: -20, opacity: 0 }}
+              transition={{ duration: 0.5, ease: "easeOut" as const }}
+              className="font-['Instrument_Serif'] text-2xl md:text-4xl text-[#38bdf8] italic"
+            >
+              {ROLES[currentRole]}
+            </motion.p>
+          </AnimatePresence>
         </div>
       </div>
 
