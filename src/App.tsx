@@ -1,66 +1,57 @@
 import { ThreeCanvas } from './components/ThreeCanvas';
-import { Hero3D } from './components/Hero3D';
-import { Skills3D } from './components/Skills3D';
-import { InteractiveProjects } from './components/InteractiveProjects';
-import { Experience3D } from './components/Experience3D';
-import { PrismaSkills } from './components/PrismaSkills';
+import { SpaceHero } from './components/SpaceHero';
+import { SpacePitch } from './components/SpacePitch';
+import { SpaceWork } from './components/SpaceWork';
+import { SpaceAbout } from './components/SpaceAbout';
+import { SpaceContact } from './components/SpaceContact';
+import { useSpaceScroll } from './hooks/useSpaceScroll';
 
+/**
+ * Space-flight architecture:
+ * - The page has 800vh of scroll height (the "scroll runway")
+ * - The viewport is fixed — nothing scrolls visually
+ * - Scroll progress (0-1) drives the Three.js camera forward through stars
+ * - Each content section is a fixed overlay with opacity controlled by scroll range
+ * 
+ * Section scroll ranges:
+ *   Hero:    0.00 – 0.18  (visible at start, fades out as you fly)
+ *   Pitch:   0.15 – 0.33  (appears mid-flight)
+ *   Work:    0.30 – 0.52  (projects float in)
+ *   About:   0.50 – 0.73  (about me section)
+ *   Contact: 0.70 – 1.00  (final destination)
+ */
 export default function App() {
+  const { progress, sectionOpacity } = useSpaceScroll();
+
+  // Calculate opacity for each section with overlapping fade zones
+  const heroOpacity    = sectionOpacity(0.00, 0.18, 0.03);
+  const pitchOpacity   = sectionOpacity(0.15, 0.33, 0.04);
+  const workOpacity    = sectionOpacity(0.30, 0.52, 0.04);
+  const aboutOpacity   = sectionOpacity(0.50, 0.73, 0.04);
+  const contactOpacity = sectionOpacity(0.70, 1.00, 0.04);
+
   return (
-    <div className="overflow-x-clip bg-[#121010] text-[#E6E1DF] font-sans relative selection:bg-[#a855f7]/30">
-      {/* 3D WebGL Background Canvas */}
-      <ThreeCanvas />
+    <>
+      {/* Scroll runway — creates the scroll height but is invisible */}
+      <div style={{ height: '800vh' }} aria-hidden="true" />
 
-      {/* Main Content Sections */}
-      <main className="relative z-10">
-        {/* 1. HERO — Bold Typographic Intro & 3D Tilt */}
-        <Hero3D />
+      {/* 3D WebGL star field — camera flies forward based on scroll */}
+      <ThreeCanvas scrollProgress={progress} />
 
-        {/* 2. SELECTED CASE STUDIES */}
-        <InteractiveProjects />
+      {/* Fixed overlay sections — one at a time */}
+      <SpaceHero opacity={heroOpacity} />
+      <SpacePitch opacity={pitchOpacity} />
+      <SpaceWork opacity={workOpacity} />
+      <SpaceAbout opacity={aboutOpacity} />
+      <SpaceContact opacity={contactOpacity} />
 
-        {/* 3. EXPERTISE & METHODOLOGY */}
-        <Skills3D />
-
-        {/* 4. CAREER & EXPERIENCE */}
-        <Experience3D />
-
-        {/* 5. CONTACT & INITIATION */}
-        <PrismaSkills />
-      </main>
-
-      {/* Footer */}
-      <footer className="relative z-10 bg-[#0E0C0C] border-t border-[#E6E1DF]/10 font-mono text-xs text-[#8C8684] py-10">
-        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p>
-            &copy; 2026 Vaishnu Vindula. All rights reserved.
-          </p>
-          <div className="flex gap-6">
-            <a
-              href="https://github.com/vaishnu7070"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#E6E1DF] transition-colors"
-            >
-              GITHUB
-            </a>
-            <a
-              href="https://linkedin.com/in/vaishnuvindula"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#E6E1DF] transition-colors"
-            >
-              LINKEDIN
-            </a>
-            <a
-              href="mailto:vaishnu7070@gmail.com"
-              className="hover:text-[#E6E1DF] transition-colors"
-            >
-              EMAIL
-            </a>
-          </div>
-        </div>
-      </footer>
-    </div>
+      {/* Scroll progress indicator */}
+      <div
+        className="fixed bottom-6 right-6 z-50 font-mono text-[10px] text-[#8C8684]/60"
+        style={{ opacity: progress > 0.02 && progress < 0.98 ? 0.6 : 0 }}
+      >
+        {Math.round(progress * 100)}%
+      </div>
+    </>
   );
 }

@@ -1,216 +1,202 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback } from 'react';
 import * as THREE from 'three';
 
-export function ThreeCanvas() {
-  const containerRef = useRef<HTMLDivElement>(null);
+interface ThreeCanvasProps {
+  scrollProgress: number; // 0 to 1
+}
 
-  useEffect(() => {
+export function ThreeCanvas({ scrollProgress }: ThreeCanvasProps) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const sceneRef = useRef<{
+    renderer: THREE.WebGLRenderer;
+    scene: THREE.Scene;
+    camera: THREE.PerspectiveCamera;
+    stars: THREE.Points;
+    glowStars: THREE.Points;
+    animId: number;
+    mouseX: number;
+    mouseY: number;
+    targetMouseX: number;
+    targetMouseY: number;
+  } | null>(null);
+
+  const scrollRef = useRef(scrollProgress);
+  scrollRef.current = scrollProgress;
+
+  const initScene = useCallback(() => {
     if (!containerRef.current) return;
     const container = containerRef.current;
 
-    // Scene, Camera, Renderer
     const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      60,
-      window.innerWidth / window.innerHeight,
-      0.1,
-      1000
-    );
-    camera.position.z = 15;
+    scene.fog = new THREE.FogExp2(0x121010, 0.0008);
 
-    const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 2000);
+    camera.position.set(0, 0, 100);
+
+    const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: false });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setClearColor(0x121010, 1);
     container.appendChild(renderer.domElement);
 
-    // 1. Central 3D Geometry — Wireframe Icosahedron & Ring
-    const geometry = new THREE.IcosahedronGeometry(4, 2);
-    const wireframeMaterial = new THREE.MeshBasicMaterial({
-      color: 0x38bdf8,
-      wireframe: true,
-      transparent: true,
-      opacity: 0.12,
-    });
-    const mainMesh = new THREE.Mesh(geometry, wireframeMaterial);
-    scene.add(mainMesh);
+    // === STAR FIELD — distributed along a deep Z corridor ===
+    const starCount = 3000;
+    const starPositions = new Float32Array(starCount * 3);
+    const starSizes = new Float32Array(starCount);
+    const starColors = new Float32Array(starCount * 3);
 
-    // Inner glowing core mesh
-    const innerGeo = new THREE.IcosahedronGeometry(2.2, 1);
-    const innerMat = new THREE.MeshBasicMaterial({
-      color: 0xa855f7,
-      wireframe: true,
+    for (let i = 0; i < starCount; i++) {
+      const i3 = i * 3;
+      starPositions[i3]     = (Math.random() - 0.5) * 400;     // X spread
+      starPositions[i3 + 1] = (Math.random() - 0.5) * 400;     // Y spread
+      starPositions[i3 + 2] = 150 - Math.random() * 1200;       // Z: from +150 to -1050
+
+      starSizes[i] = Math.random() * 2.5 + 0.5;
+
+      // Warm white with occasional cyan/purple tint
+      const tint = Math.random();
+      if (tint > 0.92) {
+        // Cyan star
+        starColors[i3] = 0.22; starColors[i3+1] = 0.74; starColors[i3+2] = 0.97;
+      } else if (tint > 0.85) {
+        // Purple star
+        starColors[i3] = 0.66; starColors[i3+1] = 0.33; starColors[i3+2] = 0.97;
+      } else {
+        // Warm white
+        const brightness = 0.7 + Math.random() * 0.3;
+        starColors[i3] = brightness * 0.95;
+        starColors[i3+1] = brightness * 0.92;
+        starColors[i3+2] = brightness * 0.88;
+      }
+    }
+
+    const starGeo = new THREE.BufferGeometry();
+    starGeo.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+    starGeo.setAttribute('color', new THREE.BufferAttribute(starColors, 3));
+
+    // Circle texture for smooth points
+    const canvas = document.createElement('canvas');
+    canvas.width = 32; canvas.height = 32;
+    const ctx = canvas.getContext('2d')!;
+    const gradient = ctx.createRadialGradient(16, 16, 0, 16, 16, 16);
+    gradient.addColorStop(0, 'rgba(255,255,255,1)');
+    gradient.addColorStop(0.3, 'rgba(255,255,255,0.8)');
+    gradient.addColorStop(1, 'rgba(255,255,255,0)');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, 32, 32);
+    const starTexture = new THREE.CanvasTexture(canvas);
+
+    const starMat = new THREE.PointsMaterial({
+      size: 1.8,
+      map: starTexture,
+      transparent: true,
+      vertexColors: true,
+      blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      sizeAttenuation: true,
+    });
+
+    const stars = new THREE.Points(starGeo, starMat);
+    scene.add(stars);
+
+    // === GLOW STARS — larger, fewer, brighter nebula-like points ===
+    const glowCount = 200;
+    const glowPositions = new Float32Array(glowCount * 3);
+
+    for (let i = 0; i < glowCount; i++) {
+      const i3 = i * 3;
+      glowPositions[i3]     = (Math.random() - 0.5) * 300;
+      glowPositions[i3 + 1] = (Math.random() - 0.5) * 300;
+      glowPositions[i3 + 2] = 100 - Math.random() * 1100;
+    }
+
+    const glowGeo = new THREE.BufferGeometry();
+    glowGeo.setAttribute('position', new THREE.BufferAttribute(glowPositions, 3));
+
+    const glowMat = new THREE.PointsMaterial({
+      size: 6,
+      map: starTexture,
       transparent: true,
       opacity: 0.25,
-    });
-    const innerMesh = new THREE.Mesh(innerGeo, innerMat);
-    scene.add(innerMesh);
-
-    // Outer orbital ring
-    const ringGeo = new THREE.TorusGeometry(6, 0.02, 16, 100);
-    const ringMat = new THREE.MeshBasicMaterial({
       color: 0xe6e1df,
-      transparent: true,
-      opacity: 0.2,
-    });
-    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-    ringMesh.rotation.x = Math.PI / 3;
-    scene.add(ringMesh);
-
-    // 2. Interactive Star/Nebula Particle Field
-    const particlesCount = 700;
-    const posArray = new Float32Array(particlesCount * 3);
-    const scaleArray = new Float32Array(particlesCount);
-
-    for (let i = 0; i < particlesCount * 3; i += 3) {
-      posArray[i] = (Math.random() - 0.5) * 60;
-      posArray[i + 1] = (Math.random() - 0.5) * 60;
-      posArray[i + 2] = (Math.random() - 0.5) * 60;
-      scaleArray[i / 3] = Math.random();
-    }
-
-    const particlesGeometry = new THREE.BufferGeometry();
-    particlesGeometry.setAttribute(
-      'position',
-      new THREE.BufferAttribute(posArray, 3)
-    );
-
-    // Custom circle canvas texture for smooth particle points
-    const canvas = document.createElement('canvas');
-    canvas.width = 16;
-    canvas.height = 16;
-    const ctx = canvas.getContext('2d');
-    if (ctx) {
-      ctx.beginPath();
-      ctx.arc(8, 8, 7, 0, Math.PI * 2);
-      ctx.fillStyle = '#ffffff';
-      ctx.fill();
-    }
-    const particleTexture = new THREE.CanvasTexture(canvas);
-
-    const particlesMaterial = new THREE.PointsMaterial({
-      size: 0.12,
-      map: particleTexture,
-      transparent: true,
-      opacity: 0.45,
-      color: 0x8c8684,
       blending: THREE.AdditiveBlending,
+      depthWrite: false,
+      sizeAttenuation: true,
     });
 
-    const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
-    scene.add(particlesMesh);
+    const glowStars = new THREE.Points(glowGeo, glowMat);
+    scene.add(glowStars);
 
-    // Ambient & Point Lighting
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
-    scene.add(ambientLight);
-
-    const pointLight = new THREE.PointLight(0x38bdf8, 2, 50);
-    pointLight.position.set(10, 10, 10);
-    scene.add(pointLight);
-
-    const purpleLight = new THREE.PointLight(0xa855f7, 2, 50);
-    purpleLight.position.set(-10, -10, -10);
-    scene.add(purpleLight);
-
-    // Mouse Tracking & Parallax
-    let mouseX = 0;
-    let mouseY = 0;
-    let targetX = 0;
-    let targetY = 0;
+    // Mouse tracking
+    let mouseX = 0, mouseY = 0, targetMouseX = 0, targetMouseY = 0;
 
     const handleMouseMove = (e: MouseEvent) => {
       mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
       mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
     };
-
-    // Scroll progress Tracking
-    let scrollY = window.scrollY;
-    const handleScroll = () => {
-      scrollY = window.scrollY;
-    };
-
     window.addEventListener('mousemove', handleMouseMove);
-    window.addEventListener('scroll', handleScroll);
 
-    // Resize Handler
     const handleResize = () => {
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
     };
-
     window.addEventListener('resize', handleResize);
 
-    // Animation Loop
-    let animationFrameId: number;
-    const clock = new THREE.Clock();
-
+    // Animation loop
     const animate = () => {
-      animationFrameId = requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
+      const animId = requestAnimationFrame(animate);
+      
+      // Lerp mouse
+      targetMouseX += (mouseX - targetMouseX) * 0.04;
+      targetMouseY += (mouseY - targetMouseY) * 0.04;
 
-      // Smooth mouse lerp
-      targetX += (mouseX - targetX) * 0.05;
-      targetY += (mouseY - targetY) * 0.05;
+      // Camera flies forward based on scroll (z: 100 to -900)
+      const progress = scrollRef.current;
+      const targetZ = 100 - progress * 1000;
+      camera.position.z = targetZ;
+      camera.position.x = targetMouseX * 15;
+      camera.position.y = -targetMouseY * 15;
+      camera.lookAt(camera.position.x * 0.5, -camera.position.y * 0.3, targetZ - 100);
 
-      // Scroll progress
-      const maxScroll = Math.max(
-        document.body.scrollHeight - window.innerHeight,
-        1
-      );
-      const scrollFraction = scrollY / maxScroll;
-
-      // Rotate Meshes
-      mainMesh.rotation.y = elapsedTime * 0.15 + targetX * 0.5;
-      mainMesh.rotation.x = elapsedTime * 0.1 + targetY * 0.5;
-
-      innerMesh.rotation.y = -elapsedTime * 0.25 + targetX * 0.3;
-      innerMesh.rotation.z = elapsedTime * 0.15;
-
-      ringMesh.rotation.z = elapsedTime * 0.1;
-      ringMesh.rotation.y = targetX * 0.4;
-
-      particlesMesh.rotation.y = elapsedTime * 0.03 + targetX * 0.2;
-      particlesMesh.rotation.x = -elapsedTime * 0.02 + targetY * 0.2;
-
-      // Camera motion based on scroll & mouse
-      camera.position.x = targetX * 1.5;
-      camera.position.y = -targetY * 1.5 - scrollFraction * 4;
-      camera.position.z = 15 + Math.sin(scrollFraction * Math.PI) * 3;
-      camera.lookAt(0, -scrollFraction * 3, 0);
+      // Subtle star field rotation for life
+      stars.rotation.z = progress * 0.1;
 
       renderer.render(scene, camera);
+
+      if (sceneRef.current) sceneRef.current.animId = animId;
     };
 
-    animate();
+    const animId = requestAnimationFrame(animate);
 
-    // Cleanup
+    sceneRef.current = {
+      renderer, scene, camera, stars, glowStars, animId,
+      mouseX, mouseY, targetMouseX, targetMouseY,
+    };
+
     return () => {
       window.removeEventListener('mousemove', handleMouseMove);
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
-      cancelAnimationFrame(animationFrameId);
-
-      geometry.dispose();
-      wireframeMaterial.dispose();
-      innerGeo.dispose();
-      innerMat.dispose();
-      ringGeo.dispose();
-      ringMat.dispose();
-      particlesGeometry.dispose();
-      particlesMaterial.dispose();
-      particleTexture.dispose();
+      cancelAnimationFrame(sceneRef.current?.animId || 0);
+      starGeo.dispose(); starMat.dispose(); starTexture.dispose();
+      glowGeo.dispose(); glowMat.dispose();
       renderer.dispose();
-
       if (container.contains(renderer.domElement)) {
         container.removeChild(renderer.domElement);
       }
+      sceneRef.current = null;
     };
   }, []);
+
+  useEffect(() => {
+    const cleanup = initScene();
+    return cleanup;
+  }, [initScene]);
 
   return (
     <div
       ref={containerRef}
-      className="fixed inset-0 pointer-events-none z-0 overflow-hidden"
+      className="fixed inset-0 z-0"
       aria-hidden="true"
     />
   );

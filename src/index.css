@@ -5,7 +5,7 @@
 }
 
 /* =============================================
-   DUNGYOV-STYLE 3D DESIGN SYSTEM (#121010)
+   SPACE-FLIGHT DESIGN SYSTEM
    ============================================= */
 
 @layer base {
@@ -16,7 +16,7 @@
   }
   
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto; /* NO smooth scroll — we need instant for the camera */
   }
 
   html, body, #root {
@@ -80,17 +80,7 @@
     font-family: 'Instrument Serif', serif;
   }
 
-  /* ── GLOWING GRID FLOOR ── */
-  .grid-floor {
-    background-image:
-      linear-gradient(rgba(230, 225, 223, 0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(230, 225, 223, 0.04) 1px, transparent 1px);
-    background-size: 50px 50px;
-    mask-image: radial-gradient(ellipse 80% 50% at 50% 100%, black 40%, transparent 100%);
-    -webkit-mask-image: radial-gradient(ellipse 80% 50% at 50% 100%, black 40%, transparent 100%);
-  }
-
-  /* ── HOLOGRAPHIC DUNGYOV BORDER ── */
+  /* ── HOLOGRAPHIC BORDER ── */
   .holo-border-dungyov {
     position: relative;
     isolation: isolate;
@@ -117,7 +107,7 @@
     z-index: -1;
   }
 
-  /* ── PREMIUM DUNGYOV CHARCOAL GLASS ── */
+  /* ── GLASS PANEL ── */
   .glass-dungyov {
     background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
     backdrop-filter: blur(24px) saturate(180%);
@@ -129,19 +119,36 @@
       inset 0 1px 0 rgba(255, 255, 255, 0.06);
   }
 
-  /* ── STAR FIELD ── */
-  .star-field {
-    background-image: 
-      radial-gradient(1px 1px at 8%   12%, rgba(230, 225, 223, 0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 22%  67%, rgba(230, 225, 223, 0.4) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 37% 22%, rgba(56, 189, 248, 0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 51%  88%, rgba(230, 225, 223, 0.3) 0%, transparent 100%),
-      radial-gradient(1px 1px at 63%   5%, rgba(168, 85, 247, 0.5) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 74% 44%, rgba(230, 225, 223, 0.5) 0%, transparent 100%),
-      radial-gradient(1px 1px at 88%  78%, rgba(230, 225, 223, 0.4) 0%, transparent 100%),
-      radial-gradient(1px 1px at 14%  38%, rgba(230, 225, 223, 0.3) 0%, transparent 100%),
-      radial-gradient(1.5px 1.5px at 92% 19%, rgba(56, 189, 248, 0.6) 0%, transparent 100%),
-      radial-gradient(1px 1px at 77%  33%, rgba(230, 225, 223, 0.5) 0%, transparent 100%);
+  /* ── SECTION LABEL ── */
+  .section-label {
+    font-family: 'Kanit', monospace;
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #8C8684;
+  }
+
+  /* ── GLOW BUTTON ── */
+  .glow-btn {
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+  }
+  .glow-btn::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #38bdf8, #a855f7);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+  }
+  .glow-btn:hover::before {
+    opacity: 0.6;
+  }
+  .glow-btn:hover {
+    box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), 0 0 60px rgba(168, 85, 247, 0.2);
   }
 }
 
@@ -161,7 +168,20 @@
   100% { background-position: 0% 50%; }
 }
 
-@keyframes marquee {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+@keyframes bounce-arrow {
+  0%, 100% { transform: translateY(0); opacity: 0.6; }
+  50% { transform: translateY(8px); opacity: 1; }
+}
+
+.bounce-arrow {
+  animation: bounce-arrow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.15), 0 0 40px rgba(168, 85, 247, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), 0 0 60px rgba(168, 85, 247, 0.2); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
 }
