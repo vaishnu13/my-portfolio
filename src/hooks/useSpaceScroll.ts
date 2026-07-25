@@ -44,8 +44,8 @@ export function useSpaceScroll() {
       if (start > 0 && progress < start + fadeDuration) {
         return (progress - start) / fadeDuration;
       }
-      // Fade out
-      if (progress > end - fadeDuration) {
+      // Fade out (only if end < 1.00 - last section stays visible at scroll end)
+      if (end < 1.00 && progress > end - fadeDuration) {
         return (end - progress) / fadeDuration;
       }
       return 1;

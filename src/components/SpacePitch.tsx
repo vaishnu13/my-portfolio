@@ -9,7 +9,6 @@ export const SpacePitch: React.FC<SpacePitchProps> = ({ opacity }) => {
   const controls = useAnimation();
 
   useEffect(() => {
-    // Trigger the character reveal animation when the section is sufficiently visible
     if (opacity > 0.5) {
       controls.start('visible');
     } else if (opacity < 0.1) {
@@ -17,7 +16,7 @@ export const SpacePitch: React.FC<SpacePitchProps> = ({ opacity }) => {
     }
   }, [opacity, controls]);
 
-  const text = "I build digital products that solve real problems. From AI-powered tools to full-stack platforms, I turn complex ideas into elegant solutions.";
+  const text = "Architecting next-generation digital experiences & intelligent AI systems. Transforming complex challenges into seamless, high-impact products.";
   
   const containerVariants = {
     hidden: { opacity: 0 },

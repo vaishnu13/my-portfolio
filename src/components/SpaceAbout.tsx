@@ -12,86 +12,110 @@ export const SpaceAbout: React.FC<SpaceAboutProps> = ({ opacity }) => {
         opacity,
         pointerEvents: opacity === 0 ? 'none' : 'auto',
       }}
-      className="fixed inset-0 z-40 flex flex-col justify-center px-6 md:px-20 text-[#E6E1DF] font-sans"
+      className="fixed inset-0 z-40 flex flex-col items-center justify-center p-6 md:p-12 text-[#E6E1DF]"
     >
-      <div className="absolute top-8 left-8 md:top-12 md:left-12 text-xs md:text-sm font-mono tracking-widest text-[#8C8684]">
-        SECTION — ABOUT
+      {/* Section Label */}
+      <div className="absolute top-8 left-8 md:top-10 md:left-12 text-xs font-mono tracking-widest text-[#8C8684] uppercase">
+        Section — About
       </div>
 
-      <div className="max-w-6xl mx-auto w-full grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-start overflow-y-auto max-h-screen py-24 scrollbar-hide">
-        {/* Left Column: Story */}
-        <div className="flex flex-col gap-6">
-          <h2 className="text-4xl md:text-6xl font-serif italic text-[#E6E1DF]">
-            SHORT STORY
+      <div className="max-w-5xl w-full flex flex-col gap-8 my-auto overflow-y-auto max-h-[85vh] py-4 scrollbar-hide">
+        {/* Top Header */}
+        <div className="flex flex-col gap-2 text-left">
+          <h2 className="text-3xl md:text-5xl font-['Instrument_Serif'] italic text-white">
+            BACKGROUND & EXPERTISE
           </h2>
-          <p className="text-lg md:text-xl leading-relaxed text-[#8C8684] font-sans">
-            I'm Vaishnu Vindula — a passionate full-stack developer and AI enthusiast based in India. I started my journey in tech driven by curiosity and a desire to build products that make a real impact. With expertise spanning from React and TypeScript to Python and machine learning, I bring ideas to life through clean code and thoughtful design. When I'm not coding, you'll find me exploring new AI breakthroughs or contributing to open-source projects.
+          <p className="text-sm font-['Kanit'] text-[#8C8684] tracking-wide max-w-xl">
+            Passionate full-stack developer & AI engineer dedicated to crafting modern digital products.
           </p>
-
-          <div className="mt-8 space-y-6">
-            <h3 className="text-xl md:text-2xl font-serif italic text-[#E6E1DF]">Skills</h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-              <SkillCategory title="Frontend" skills={['React', 'Next.js', 'TypeScript', 'Tailwind CSS']} />
-              <SkillCategory title="Backend" skills={['Node.js', 'Python', 'Express', 'MongoDB']} />
-              <SkillCategory title="AI/ML" skills={['TensorFlow', 'NLP', 'Prompt Engineering']} />
-              <SkillCategory title="Tools" skills={['Git', 'Docker', 'Vercel', 'Firebase']} />
-            </div>
-          </div>
         </div>
 
-        {/* Right Column: Details & Socials */}
-        <div className="flex flex-col gap-6">
-          <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-8 flex flex-col gap-4">
-            <DetailItem label="Name" value="Vaishnu Vindula" />
-            <DetailItem label="Location" value="India" />
-            <DetailItem label="Education" value="B.Tech in Computer Science" />
-            <DetailItem label="Focus" value="Full-Stack Development, AI/ML" />
-            <DetailItem label="Email" value="vaishnu7070@gmail.com" />
-            
-            <div className="mt-6 pt-6 border-t border-white/10 flex gap-4">
+        {/* Grid Container */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          
+          {/* Bio Box (Left 7 Cols) */}
+          <div className="lg:col-span-7 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col justify-between gap-6">
+            <div className="flex flex-col gap-4 text-left">
+              <h3 className="text-xs font-mono uppercase tracking-widest text-[#38bdf8]">
+                Overview
+              </h3>
+              <p className="text-sm md:text-base leading-relaxed text-[#D7E2EA] font-['Kanit']">
+                I specialize in building scalable web applications and integrating cutting-edge AI features. With a strong background in Computer Science, I bridge complex backend logic with smooth 3D frontend interfaces.
+              </p>
+              <p className="text-sm md:text-base leading-relaxed text-[#8C8684] font-['Kanit']">
+                Driven by curiosity, I constantly push the boundaries of product design, real-time interactivity, and AI automation.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap gap-4 pt-4 border-t border-white/5">
               <a
                 href="https://github.com/vaishnu7070"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 transition-colors rounded-full text-sm font-medium tracking-wide"
+                className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors rounded-full text-xs font-mono tracking-wider text-[#E6E1DF]"
               >
-                GitHub
+                GITHUB ↗
               </a>
               <a
-                href="https://linkedin.com/in/vaishnuvindula"
+                href="https://linkedin.com/in/vaishnu-vindula"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-4 py-2 bg-white/10 hover:bg-white/20 transition-colors rounded-full text-sm font-medium tracking-wide"
+                className="px-4 py-2 bg-white/5 hover:bg-white/10 border border-white/10 transition-colors rounded-full text-xs font-mono tracking-wider text-[#E6E1DF]"
               >
-                LinkedIn
+                LINKEDIN ↗
               </a>
             </div>
           </div>
+
+          {/* Quick Info (Right 5 Cols) */}
+          <div className="lg:col-span-5 bg-white/[0.03] backdrop-blur-xl border border-white/10 rounded-2xl p-6 md:p-8 flex flex-col justify-between gap-4">
+            <h3 className="text-xs font-mono uppercase tracking-widest text-[#a855f7]">
+              Details
+            </h3>
+            <div className="space-y-4">
+              <DetailRow label="Location" value="India" />
+              <DetailRow label="Degree" value="B.Tech Computer Science" />
+              <DetailRow label="Focus" value="Full-Stack & AI" />
+              <DetailRow label="Email" value="vaishnu7070@gmail.com" />
+            </div>
+          </div>
+
         </div>
+
+        {/* Skills Grid */}
+        <div className="bg-white/[0.02] border border-white/5 rounded-2xl p-6 md:p-8 flex flex-col gap-4 text-left">
+          <h3 className="text-xs font-mono uppercase tracking-widest text-[#8C8684]">
+            Technical Stack
+          </h3>
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+            <SkillGroup title="Frontend" skills={['React', 'Next.js', 'TypeScript', 'Tailwind CSS']} />
+            <SkillGroup title="Backend" skills={['Node.js', 'Python', 'Express', 'MongoDB']} />
+            <SkillGroup title="AI / ML" skills={['TensorFlow', 'NLP', 'Prompt Eng.']} />
+            <SkillGroup title="Deployment" skills={['Git', 'Docker', 'Vercel', 'Firebase']} />
+          </div>
+        </div>
+
       </div>
     </motion.div>
   );
 };
 
-const SkillCategory = ({ title, skills }: { title: string; skills: string[] }) => (
-  <div className="flex flex-col gap-3">
-    <div className="text-sm font-mono tracking-wider text-[#8C8684] uppercase">{title}</div>
-    <div className="flex flex-wrap gap-2">
-      {skills.map((skill) => (
-        <span
-          key={skill}
-          className="px-3 py-1 bg-[#38bdf8]/10 text-[#38bdf8] border border-[#38bdf8]/20 rounded-full text-xs font-medium"
-        >
-          {skill}
+const SkillGroup = ({ title, skills }: { title: string; skills: string[] }) => (
+  <div className="flex flex-col gap-2">
+    <span className="text-[11px] font-mono text-[#8C8684] uppercase tracking-wider">{title}</span>
+    <div className="flex flex-wrap gap-1.5">
+      {skills.map((s) => (
+        <span key={s} className="px-2.5 py-1 bg-white/5 border border-white/10 rounded-md text-xs font-['Kanit'] text-[#E6E1DF]">
+          {s}
         </span>
       ))}
     </div>
   </div>
 );
 
-const DetailItem = ({ label, value }: { label: string; value: string }) => (
-  <div className="flex flex-col sm:flex-row sm:items-center gap-1 sm:gap-4">
-    <span className="text-sm font-mono text-[#8C8684] w-24 shrink-0 uppercase">{label}</span>
-    <span className="text-base text-[#E6E1DF]">{value}</span>
+const DetailRow = ({ label, value }: { label: string; value: string }) => (
+  <div className="flex justify-between items-center text-xs md:text-sm border-b border-white/5 pb-2">
+    <span className="font-mono text-[#8C8684] uppercase">{label}</span>
+    <span className="font-['Kanit'] text-[#E6E1DF] font-medium">{value}</span>
   </div>
 );
