@@ -1,3 +1,4 @@
+import { ThreeCanvas } from './components/ThreeCanvas';
 import { Hero3D } from './components/Hero3D';
 import { Skills3D } from './components/Skills3D';
 import { InteractiveProjects } from './components/InteractiveProjects';
@@ -6,38 +7,56 @@ import { PrismaSkills } from './components/PrismaSkills';
 
 export default function App() {
   return (
-    <div className="overflow-x-clip bg-[#030305] text-[#D7E2EA] font-sans">
-      
-      {/* 1. HERO — 3D Immersive Intro */}
-      <Hero3D />
+    <div className="overflow-x-clip bg-[#121010] text-[#E6E1DF] font-sans relative selection:bg-[#a855f7]/30">
+      {/* 3D WebGL Background Canvas */}
+      <ThreeCanvas />
 
-      {/* 2. SKILLS — 3D Tilt Cards */}
-      <Skills3D />
+      {/* Main Content Sections */}
+      <main className="relative z-10">
+        {/* 1. HERO — Bold Typographic Intro & 3D Tilt */}
+        <Hero3D />
 
-      {/* 3. FEATURED WORK — Cinematic Project Showcase */}
-      <InteractiveProjects />
+        {/* 2. SELECTED CASE STUDIES */}
+        <InteractiveProjects />
 
-      {/* 4. EXPERIENCE — 3D Timeline */}
-      <Experience3D />
+        {/* 3. EXPERTISE & METHODOLOGY */}
+        <Skills3D />
 
-      {/* 5. CONTACT — Cinematic CTA with Video */}
-      <PrismaSkills />
+        {/* 4. CAREER & EXPERIENCE */}
+        <Experience3D />
+
+        {/* 5. CONTACT & INITIATION */}
+        <PrismaSkills />
+      </main>
 
       {/* Footer */}
-      <footer className="relative z-10 bg-[#030305] border-t border-white/5">
-        <div className="max-w-6xl mx-auto px-6 py-10 flex flex-col sm:flex-row justify-between items-center gap-4">
-          <p className="text-white/30 text-sm">
-            &copy; 2025 Vaishnu Vindula. Built with <i className="fas fa-heart text-purple-400/60"></i> and Code.
+      <footer className="relative z-10 bg-[#0E0C0C] border-t border-[#E6E1DF]/10 font-mono text-xs text-[#8C8684] py-10">
+        <div className="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row justify-between items-center gap-4">
+          <p>
+            &copy; 2026 Vaishnu Vindula. All rights reserved.
           </p>
           <div className="flex gap-6">
-            <a href="https://github.com/vaishnu7070" aria-label="Github" className="text-white/30 hover:text-white transition-colors text-lg">
-              <i className="fab fa-github"></i>
+            <a
+              href="https://github.com/vaishnu7070"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#E6E1DF] transition-colors"
+            >
+              GITHUB
             </a>
-            <a href="https://linkedin.com/in/vaishnuvindula" aria-label="LinkedIn" className="text-white/30 hover:text-white transition-colors text-lg">
-              <i className="fab fa-linkedin"></i>
+            <a
+              href="https://linkedin.com/in/vaishnuvindula"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#E6E1DF] transition-colors"
+            >
+              LINKEDIN
             </a>
-            <a href="#" aria-label="Twitter" className="text-white/30 hover:text-white transition-colors text-lg">
-              <i className="fab fa-twitter"></i>
+            <a
+              href="mailto:vaishnu7070@gmail.com"
+              className="hover:text-[#E6E1DF] transition-colors"
+            >
+              EMAIL
             </a>
           </div>
         </div>
