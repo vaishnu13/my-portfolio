@@ -1,187 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Syne:wght@500;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
-  --font-sans: 'Kanit', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: 'IBM Plex Mono', monospace;
+  --font-heading: 'Syne', 'Plus Jakarta Sans', sans-serif;
 }
 
 /* =============================================
-   SPACE-FLIGHT DESIGN SYSTEM
+   EDITORIAL DESIGN SYSTEM (noth.in inspired)
    ============================================= */
 
-@layer base {
-  * {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  html {
-    scroll-behavior: auto; /* NO smooth scroll — we need instant for the camera */
-  }
-
-  html, body, #root {
-    background-color: #121010;
-    font-family: 'Kanit', sans-serif;
-    color: #E6E1DF;
-    overflow-x: hidden;
-  }
-
-  /* Ultra-sleek custom scrollbar */
-  ::-webkit-scrollbar { width: 4px; }
-  ::-webkit-scrollbar-track { background: #121010; }
-  ::-webkit-scrollbar-thumb {
-    background: linear-gradient(180deg, #38bdf8, #a855f7, #8c8684);
-    border-radius: 2px;
-  }
-
-  ::selection {
-    background: rgba(168, 85, 247, 0.35);
-    color: #fff;
-  }
+:root {
+  --bg-primary: #0D0D0D;
+  --text-primary: #F3F1EC;
+  --text-muted: #8E8D8A;
+  --accent-blue: #2500AD;
+  --accent-glow: rgba(243, 241, 236, 0.15);
 }
 
-@layer utilities {
-
-  /* ── DUNGYOV TYPOGRAPHY & TEXT EFFECTS ── */
-  .text-dungyov-3d {
-    background: linear-gradient(
-      160deg,
-      #ffffff 0%,
-      #e6e1df 40%,
-      #8c8684 75%,
-      #4a4543 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    filter: drop-shadow(0 0 40px rgba(56, 189, 248, 0.2))
-            drop-shadow(0 8px 30px rgba(168, 85, 247, 0.15));
-  }
-
-  .gradient-text-dungyov {
-    background: linear-gradient(135deg, #e6e1df 0%, #38bdf8 50%, #a855f7 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    background-size: 200% 200%;
-    animation: gradient-shift 6s ease infinite;
-  }
-
-  /* ── NOISE TEXTURE ── */
-  .bg-noise {
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
-  }
-
-  /* ── FONTS ── */
-  .prisma-section {
-    font-family: 'Almarai', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  }
-  .prisma-section .font-serif {
-    font-family: 'Instrument Serif', serif;
-  }
-
-  /* ── HOLOGRAPHIC BORDER ── */
-  .holo-border-dungyov {
-    position: relative;
-    isolation: isolate;
-  }
-  .holo-border-dungyov::before {
-    content: '';
-    position: absolute;
-    inset: -1px;
-    border-radius: inherit;
-    padding: 1px;
-    background: linear-gradient(
-      135deg,
-      rgba(230, 225, 223, 0.25),
-      rgba(56, 189, 248, 0.4),
-      rgba(168, 85, 247, 0.4),
-      rgba(140, 134, 132, 0.2)
-    );
-    background-size: 300% 300%;
-    animation: holo-shift 6s ease infinite;
-    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-    -webkit-mask-composite: xor;
-    mask-composite: exclude;
-    z-index: -1;
-  }
-
-  /* ── GLASS PANEL ── */
-  .glass-dungyov {
-    background: linear-gradient(135deg, rgba(255, 255, 255, 0.03) 0%, rgba(255, 255, 255, 0.01) 100%);
-    backdrop-filter: blur(24px) saturate(180%);
-    -webkit-backdrop-filter: blur(24px) saturate(180%);
-    border: 1px solid rgba(230, 225, 223, 0.08);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.02),
-      0 20px 50px rgba(0, 0, 0, 0.6),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  }
-
-  /* ── SECTION LABEL ── */
-  .section-label {
-    font-family: 'Kanit', monospace;
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    color: #8C8684;
-  }
-
-  /* ── GLOW BUTTON ── */
-  .glow-btn {
-    position: relative;
-    overflow: hidden;
-    transition: all 0.3s ease;
-  }
-  .glow-btn::before {
-    content: '';
-    position: absolute;
-    inset: -2px;
-    border-radius: inherit;
-    background: linear-gradient(135deg, #38bdf8, #a855f7);
-    opacity: 0;
-    transition: opacity 0.3s ease;
-    z-index: -1;
-  }
-  .glow-btn:hover::before {
-    opacity: 0.6;
-  }
-  .glow-btn:hover {
-    box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), 0 0 60px rgba(168, 85, 247, 0.2);
-  }
+html, body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+  overscroll-behavior: none;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-/* =============================================
-   KEYFRAME ANIMATIONS
-   ============================================= */
-
-@keyframes holo-shift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Hide scrollbar completely */
+body::-webkit-scrollbar,
+html::-webkit-scrollbar {
+  display: none;
+}
+body, html {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
-@keyframes gradient-shift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Selection styling */
+::selection {
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
 }
 
-@keyframes bounce-arrow {
-  0%, 100% { transform: translateY(0); opacity: 0.6; }
-  50% { transform: translateY(8px); opacity: 1; }
+/* Typography utilities */
+.font-mono-code {
+  font-family: var(--font-mono);
 }
 
-.bounce-arrow {
-  animation: bounce-arrow 2s ease-in-out infinite;
+.font-heading {
+  font-family: var(--font-heading);
 }
 
-@keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(56, 189, 248, 0.15), 0 0 40px rgba(168, 85, 247, 0.1); }
-  50% { box-shadow: 0 0 30px rgba(56, 189, 248, 0.3), 0 0 60px rgba(168, 85, 247, 0.2); }
+/* Editorial line reveal container */
+.line-reveal-overflow {
+  overflow: hidden;
+  display: inline-block;
+  vertical-align: bottom;
 }
 
-.pulse-glow {
-  animation: pulse-glow 3s ease-in-out infinite;
+/* Custom interactive button styles matching noth.in */
+.btn-editorial {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid rgba(243, 241, 236, 0.2);
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(10px);
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-editorial:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-color: var(--text-primary);
+}
+
+/* Marquee / Glitch animations */
+@keyframes glitch-marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-glitch-marquee {
+  display: flex;
+  width: 200%;
+  animation: glitch-marquee 25s linear infinite;
+}
+
+/* Noise overlay */
+.bg-noise {
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
 }
