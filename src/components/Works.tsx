@@ -3,31 +3,33 @@ import { motion } from 'framer-motion';
 const projects = [
   {
     id: '01',
-    name: 'CodeXVerse',
-    tagline: 'A real-time collaborative code editor with AI.',
-    link: 'https://codexverse-eight.vercel.app',
-    year: '2025',
+    name: 'PromptPilot',
+    tagline: 'AI Prompt Engineering Assistant & Optimization Suite',
+    desc: 'Transforms simple prompts into structured, high-quality prompts. Integrated LLMs for intelligent analysis with an intuitive UI for real-time prompt refinement.',
+    live: 'https://prompt-pilot-taupe.vercel.app/',
+    github: 'https://github.com/vaishnuvindula',
+    tags: ['LLMs', 'Prompt Engineering', 'React', 'Vercel'],
+    year: 'April 2026',
   },
   {
     id: '02',
-    name: 'Prompt Pilot',
-    tagline: 'AI prompt engineering suite & visual workflow.',
-    link: 'https://github.com/vaishnuvindula',
-    year: '2025',
+    name: 'CollabCode',
+    tagline: 'AI-Native Collaborative Development Platform',
+    desc: 'Cloud-based IDE with AI assistance, user auth, team workspaces, and real-time collaboration via WebSockets so multiple developers code together live.',
+    live: 'https://codexverse-eight.vercel.app/',
+    github: 'https://github.com/vaishnuvindula',
+    tags: ['React', 'WebSockets', 'LLMs', 'Team Workspaces'],
+    year: 'May 2026',
   },
   {
     id: '03',
-    name: 'Prisma Metrics',
-    tagline: 'High-throughput analytics & telemetry dashboard.',
-    link: 'https://github.com/vaishnuvindula',
-    year: '2024',
-  },
-  {
-    id: '04',
-    name: 'Antigravity Agents',
-    tagline: 'Autonomous multi-agent orchestration engine.',
-    link: 'https://github.com/vaishnuvindula',
-    year: '2026',
+    name: 'NVIDIA NIM on GKE',
+    tagline: 'Generative AI Model Deployment on Google Cloud & Kubernetes',
+    desc: 'Deployed AI models on GCP using NVIDIA NIM on GKE. Configured auto-scaling, load balancing for high availability, and real-time performance monitoring.',
+    live: 'https://nvidia-on-gke-codelab.vercel.app/',
+    github: 'https://github.com/vaishnuvindula',
+    tags: ['Google Cloud', 'NVIDIA NIM', 'Kubernetes', 'GKE'],
+    year: 'August 2025',
   },
 ];
 
@@ -35,117 +37,122 @@ export function Works() {
   return (
     <section id="works" className="bg-white py-24 px-6 md:px-12 border-t border-[#121212]/10">
       <div className="max-w-7xl mx-auto space-y-16">
-
-        {/* WORKS big word — exactly like noth.in */}
-        <div>
-          <span
-            className="text-[#121212] text-[11px] tracking-widest uppercase block mb-4"
+        {/* Header */}
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+          <div>
+            <span
+              className="text-[#121212] text-[11px] tracking-widest uppercase block mb-2"
+              style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+            >
+              ( Featured Work )
+            </span>
+            <div
+              className="flex gap-2 md:gap-4 overflow-hidden"
+              style={{ fontFamily: "'Syne', sans-serif" }}
+            >
+              {'WORKS'.split('').map((letter, i) => (
+                <motion.span
+                  key={i}
+                  initial={{ y: '100%' }}
+                  whileInView={{ y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: i * 0.08 }}
+                  className="text-[#121212] inline-block font-black"
+                  style={{
+                    fontSize: 'clamp(3.5rem, 12vw, 9rem)',
+                    lineHeight: 1,
+                    letterSpacing: '-0.04em',
+                  }}
+                >
+                  {letter}
+                </motion.span>
+              ))}
+            </div>
+          </div>
+          <div
+            className="text-right text-[11px] text-[#121212]/50"
             style={{ fontFamily: "'IBM Plex Mono', monospace" }}
           >
-            ( Selected Projects )
-          </span>
-          <div
-            className="flex gap-2 md:gap-4 overflow-hidden"
-            style={{ fontFamily: "'Syne', sans-serif" }}
-          >
-            {'WORKS'.split('').map((letter, i) => (
-              <motion.span
-                key={i}
-                initial={{ y: '100%' }}
-                whileInView={{ y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.33, 1, 0.68, 1] }}
-                className="text-[#121212] inline-block"
-                style={{
-                  fontSize: 'clamp(4rem, 14vw, 12rem)',
-                  fontWeight: 900,
-                  lineHeight: 1,
-                  letterSpacing: '-0.04em',
-                }}
-              >
-                {letter}
-              </motion.span>
-            ))}
+            03 PRODUCTION PROJECTS<br />
+            2025 — 2026
           </div>
         </div>
 
-        {/* Subtitle */}
-        <h3
-          className="text-[#121212] max-w-2xl leading-snug"
-          style={{
-            fontFamily: "'Syne', sans-serif",
-            fontWeight: 700,
-            fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
-            letterSpacing: '-0.02em',
-          }}
-        >
-          Good developers communicate.<br />
-          Great products surprise.
-        </h3>
-
-        {/* Project list — noth.in style rows */}
-        <div>
+        {/* Projects List */}
+        <div className="space-y-12">
           {projects.map((project, i) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
+              className="p-8 rounded-2xl border border-[#121212]/10 bg-[#FAF9F6] hover:border-[#121212] transition-all duration-300 space-y-6"
             >
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-t border-[#121212]/10 hover:bg-[#f5f5f5] -mx-4 px-4 transition-colors duration-200"
-              >
-                {/* Left: number + name + tagline */}
-                <div className="flex items-start md:items-center gap-6">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-[#121212]/10 pb-6">
+                <div className="flex items-baseline gap-4">
                   <span
-                    className="text-[#121212]/30 text-[11px] pt-1"
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                    className="text-[#121212]/40 text-xs font-mono"
                   >
                     {project.id}
                   </span>
                   <div>
-                    <h4
-                      className="text-[#121212] group-hover:translate-x-1 transition-transform duration-200"
-                      style={{
-                        fontFamily: "'Syne', sans-serif",
-                        fontWeight: 800,
-                        fontSize: 'clamp(1.5rem, 4vw, 3rem)',
-                        letterSpacing: '-0.03em',
-                        lineHeight: 1,
-                      }}
+                    <h3
+                      className="text-3xl md:text-5xl font-black text-[#121212]"
+                      style={{ fontFamily: "'Syne', sans-serif", letterSpacing: '-0.03em' }}
                     >
                       {project.name}
-                    </h4>
+                    </h3>
                     <p
-                      className="text-[#121212]/50 mt-1"
-                      style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.8rem' }}
+                      className="text-xs text-[#121212]/60 mt-1 font-mono"
                     >
                       {project.tagline}
                     </p>
                   </div>
                 </div>
 
-                {/* Right: year + arrow */}
-                <div className="flex items-center gap-4 mt-4 md:mt-0">
-                  <span
-                    className="text-[#121212]/30 text-[11px]"
-                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                <div className="flex items-center gap-3">
+                  <a
+                    href={project.live}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-pill bg-[#121212] text-white hover:bg-black"
                   >
-                    {project.year}
-                  </span>
-                  <div className="w-8 h-8 rounded-full border border-[#121212]/20 flex items-center justify-center group-hover:bg-[#121212] group-hover:text-white transition-all duration-200">
-                    <span className="text-xs rotate-[-45deg] inline-block">→</span>
-                  </div>
+                    <span>LIVE DEMO</span>
+                    <span>↗</span>
+                  </a>
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="btn-pill"
+                  >
+                    <span>GITHUB</span>
+                    <span>↗</span>
+                  </a>
                 </div>
-              </a>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
+                <p
+                  className="md:col-span-2 text-sm text-[#121212]/70 leading-relaxed font-mono"
+                >
+                  {project.desc}
+                </p>
+
+                <div className="flex flex-wrap gap-2 md:justify-end">
+                  {project.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="px-3 py-1 rounded-full text-[10px] uppercase font-mono bg-white border border-[#121212]/15 text-[#121212]"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+              </div>
             </motion.div>
           ))}
-          {/* Last border */}
-          <div className="border-t border-[#121212]/10" />
         </div>
       </div>
     </section>
