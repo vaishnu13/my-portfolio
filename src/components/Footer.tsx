@@ -57,7 +57,7 @@ export function Footer() {
               textLength="960"
               lengthAdjust="spacingAndGlyphs"
               fill="#121212"
-              fontFamily="'Syne', sans-serif"
+              fontFamily="'Big Shoulders Display', 'Antonio', 'Bebas Neue', sans-serif"
               fontWeight="900"
               fontSize="120"
             >

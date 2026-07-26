@@ -12,6 +12,7 @@ export function Hero({ onMenuClick }: HeroProps) {
     >
       {/* ── TOP BAR ── */}
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-start p-6 md:p-8 pointer-events-none">
+        {/* Top-left tagline */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -33,6 +34,7 @@ export function Hero({ onMenuClick }: HeroProps) {
           </div>
         </motion.div>
 
+        {/* Top-right: MENU */}
         <motion.button
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -49,26 +51,55 @@ export function Hero({ onMenuClick }: HeroProps) {
         </motion.button>
       </div>
 
-      {/* ── CENTER: MASSIVE NAME ── */}
+      {/* ── CENTER: AALTO TALL DISPLAY TYPEFACE NAME ── */}
       <div className="flex-1 flex flex-col justify-center px-4 md:px-8 pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="w-full max-w-7xl mx-auto space-y-2 md:space-y-4"
+          className="w-full max-w-7xl mx-auto space-y-1 md:space-y-2"
         >
+          {/* Line 1: VAISHNU (Aalto style tall condensed font) */}
           <div className="w-full overflow-hidden">
-            <svg viewBox="0 0 1000 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block">
-              <text x="500" y="130" textAnchor="middle" textLength="960" lengthAdjust="spacingAndGlyphs"
-                fill="#121212" fontFamily="'Syne', sans-serif" fontWeight="900" fontSize="150">
+            <svg
+              viewBox="0 0 1000 170"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto block"
+            >
+              <text
+                x="500"
+                y="140"
+                textAnchor="middle"
+                textLength="960"
+                lengthAdjust="spacingAndGlyphs"
+                fill="#121212"
+                fontFamily="'Big Shoulders Display', 'Antonio', 'Bebas Neue', sans-serif"
+                fontWeight="900"
+                fontSize="175"
+              >
                 VAISHNU
               </text>
             </svg>
           </div>
+
+          {/* Line 2: VINDULA (Aalto style tall condensed font) */}
           <div className="w-full overflow-hidden">
-            <svg viewBox="0 0 1000 160" xmlns="http://www.w3.org/2000/svg" className="w-full h-auto block">
-              <text x="500" y="130" textAnchor="middle" textLength="960" lengthAdjust="spacingAndGlyphs"
-                fill="#121212" fontFamily="'Syne', sans-serif" fontWeight="900" fontSize="150">
+            <svg
+              viewBox="0 0 1000 170"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto block"
+            >
+              <text
+                x="500"
+                y="140"
+                textAnchor="middle"
+                textLength="960"
+                lengthAdjust="spacingAndGlyphs"
+                fill="#121212"
+                fontFamily="'Big Shoulders Display', 'Antonio', 'Bebas Neue', sans-serif"
+                fontWeight="900"
+                fontSize="175"
+              >
                 VINDULA
               </text>
             </svg>
@@ -86,14 +117,32 @@ export function Hero({ onMenuClick }: HeroProps) {
       >
         <span>B.Tech CSE · ANITS — Visakhapatnam</span>
         <div className="flex items-center gap-4 text-[11px]">
-          <a href="https://linkedin.com/in/vaishnu-vindula" target="_blank" rel="noopener noreferrer"
-            className="hover:opacity-50 transition-opacity uppercase">LinkedIn</a>
+          <a
+            href="https://linkedin.com/in/vaishnu-vindula"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-50 transition-opacity uppercase"
+          >
+            LinkedIn
+          </a>
           <span className="opacity-30">/</span>
-          <a href="https://github.com/vaishnuvindula" target="_blank" rel="noopener noreferrer"
-            className="hover:opacity-50 transition-opacity uppercase">GitHub</a>
+          <a
+            href="https://github.com/vaishnuvindula"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-50 transition-opacity uppercase"
+          >
+            GitHub
+          </a>
           <span className="opacity-30">/</span>
-          <a href="https://g.dev/vaishnuvindula" target="_blank" rel="noopener noreferrer"
-            className="hover:opacity-50 transition-opacity uppercase">G.Dev</a>
+          <a
+            href="https://g.dev/vaishnuvindula"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-50 transition-opacity uppercase"
+          >
+            G.Dev
+          </a>
         </div>
       </motion.div>
     </section>
