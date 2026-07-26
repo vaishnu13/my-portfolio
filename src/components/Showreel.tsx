@@ -18,8 +18,10 @@ export function Showreel() {
             letterSpacing: '-0.03em',
           }}
         >
-          Most developers write code.<br />
-          We prefer ideas.
+          Aspiring AI/ML Engineer<br />
+          <span className="text-[#121212]/60 font-medium text-[0.65em] block mt-2">
+            Gen AI · Cloud (GCP/AWS) · Full-Stack Development
+          </span>
         </motion.h2>
 
         {/* 2-column editorial block */}
