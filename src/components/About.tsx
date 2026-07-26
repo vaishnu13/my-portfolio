@@ -39,8 +39,7 @@ export function About() {
                 letterSpacing: '-0.03em',
               }}
             >
-              We called it engineering because it started as a system open enough to become
-              anything: a product, a platform, a perspective...
+              Engineering open-ended systems that scale across AI, Cloud, and Full-Stack...
             </p>
           </motion.div>
 
