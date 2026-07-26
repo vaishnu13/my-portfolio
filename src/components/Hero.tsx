@@ -1,107 +1,139 @@
 import { motion } from 'framer-motion';
 
-export function Hero() {
+interface HeroProps {
+  onMenuClick: () => void;
+}
+
+export function Hero({ onMenuClick }: HeroProps) {
   return (
-    <section className="relative min-h-screen flex flex-col justify-between pt-32 pb-12 px-6 md:px-12 bg-[#0D0D0D] overflow-hidden">
-      {/* Background Subtle Gradient & Grid */}
-      <div className="absolute inset-0 bg-gradient-to-b from-white/[0.02] to-transparent pointer-events-none" />
-      <div className="absolute inset-0 bg-noise pointer-events-none" />
-
-      {/* Top Hero Tagline */}
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="max-w-xl space-y-4"
-      >
-        <p className="font-mono text-xs uppercase tracking-widest text-[#8E8D8A]">
-          ( Full-Stack Developer & AI Specialist )
-        </p>
-        <h2 className="text-2xl md:text-4xl font-light font-heading tracking-tight leading-snug text-[#F3F1EC]">
-          Not just code, a perspective.<br />
-          Building intelligent products that move fast.
-        </h2>
-        <div className="pt-2">
-          <button
-            onClick={() => {
-              const el = document.getElementById('works');
-              if (el) el.scrollIntoView({ behavior: 'smooth' });
-            }}
-            className="btn-editorial cursor-pointer"
-          >
-            <span>EXPLORE WORK</span>
-            <span>↓</span>
-          </button>
-        </div>
-      </motion.div>
-
-      {/* Giant Typography Banner (SVG styled name) */}
-      <div className="my-12 py-8 border-y border-white/10 overflow-hidden">
+    <section
+      className="relative min-h-screen bg-white flex flex-col overflow-hidden"
+      style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+    >
+      {/* ── TOP BAR ── */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-start p-6 md:p-8 pointer-events-none">
+        {/* Top-left tagline — exactly like noth.in */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 1, delay: 0.4 }}
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="pointer-events-auto max-w-xs"
+        >
+          <p className="text-[#121212] text-[11px] md:text-[13px] leading-snug">
+            Not just code, a perspective.<br />
+            Because building is Everythin'.
+          </p>
+          <div className="mt-4">
+            <a
+              href="mailto:vaishnuvindula@gmail.com"
+              className="btn-pill text-[11px]"
+            >
+              <span>get in touch</span>
+              <span>→</span>
+            </a>
+          </div>
+        </motion.div>
+
+        {/* Top-right: MENU */}
+        <motion.button
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.7, delay: 0.3 }}
+          onClick={onMenuClick}
+          className="pointer-events-auto flex items-center gap-2 text-[#121212] text-[11px] md:text-[13px] tracking-wider uppercase cursor-pointer hover:opacity-60 transition-opacity"
+          style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+        >
+          MENU
+          <span className="flex flex-col gap-[3px]">
+            <span className="w-4 h-[1.5px] bg-[#121212] block" />
+            <span className="w-4 h-[1.5px] bg-[#121212] block" />
+          </span>
+        </motion.button>
+      </div>
+
+      {/* ── CENTER: MASSIVE NAME filling full width ── */}
+      <div className="flex-1 flex items-center px-0 pt-24 pb-16">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.1 }}
           className="w-full"
         >
+          {/* 
+            Edge-to-edge massive bold text — same as "NOTHIN'" at noth.in.
+            Using SVG text to guarantee it fills the exact viewport width.
+          */}
           <svg
-            viewBox="0 0 1400 240"
-            fill="none"
+            viewBox="0 0 1000 200"
+            preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto max-h-[35vh] text-[#F3F1EC] select-none"
+            className="w-full h-auto block"
+            style={{ maxHeight: '40vh' }}
           >
             <text
-              x="50%"
-              y="55%"
-              dominantBaseline="middle"
+              x="500"
+              y="160"
               textAnchor="middle"
-              fill="currentColor"
-              fontSize="165"
+              fill="#121212"
+              fontFamily="'Syne', sans-serif"
               fontWeight="900"
-              fontFamily="Syne, Plus Jakarta Sans, sans-serif"
-              letterSpacing="-0.04em"
+              fontSize="165"
+              letterSpacing="-8"
+              style={{ fontKerning: 'none' }}
             >
-              VAISHNU VINDULA
+              VAISHNU
+            </text>
+          </svg>
+          <svg
+            viewBox="0 0 1000 200"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+            className="w-full h-auto block -mt-4"
+            style={{ maxHeight: '40vh' }}
+          >
+            <text
+              x="500"
+              y="160"
+              textAnchor="middle"
+              fill="#121212"
+              fontFamily="'Syne', sans-serif"
+              fontWeight="900"
+              fontSize="165"
+              letterSpacing="-8"
+              style={{ fontKerning: 'none' }}
+            >
+              VINDULA
             </text>
           </svg>
         </motion.div>
       </div>
 
-      {/* Bottom Bar Details */}
+      {/* ── BOTTOM BAR ── */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 0.8, delay: 0.6 }}
-        className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 font-mono text-xs uppercase tracking-wider text-[#8E8D8A] pt-4"
+        transition={{ duration: 0.8, delay: 0.5 }}
+        className="px-6 md:px-8 pb-6 flex justify-between items-end"
+        style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '11px', color: '#121212' }}
       >
-        <div>
-          <span>LOCATION — </span>
-          <span className="text-white">HYDERABAD / REMOTE</span>
-        </div>
-
-        <div className="flex items-center gap-6">
-          <a
-            href="https://codexverse-eight.vercel.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200"
-          >
-            CODEXVERSE ↗
-          </a>
-          <a
-            href="https://github.com/vaishnuvindula"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200"
-          >
-            GITHUB ↗
-          </a>
+        <span>Full-Stack & AI Engineer — Hyderabad</span>
+        <div className="flex items-center gap-4 text-[11px]">
           <a
             href="https://linkedin.com/in/vaishnuvindula"
             target="_blank"
             rel="noopener noreferrer"
-            className="hover:text-white transition-colors duration-200"
+            className="hover:opacity-50 transition-opacity uppercase"
           >
-            LINKEDIN ↗
+            LinkedIn
+          </a>
+          <span className="opacity-30">/</span>
+          <a
+            href="https://github.com/vaishnuvindula"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-50 transition-opacity uppercase"
+          >
+            GitHub
           </a>
         </div>
       </motion.div>

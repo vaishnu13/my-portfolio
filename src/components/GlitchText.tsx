@@ -1,37 +1,60 @@
-import { motion } from 'framer-motion';
-
 export function GlitchText() {
-  return (
-    <section className="py-24 bg-[#0D0D0D] border-b border-white/10 overflow-hidden select-none">
-      {/* Repeating Marquee Lines */}
-      <div className="space-y-4 opacity-80">
-        <div className="flex whitespace-nowrap font-heading font-black text-4xl md:text-7xl uppercase text-white/10 tracking-tighter animate-glitch-marquee">
-          <span className="mr-8">VAISHNU VINDULA // FULL STACK // AI SPECIALIST //</span>
-          <span className="mr-8">VAISHNU VINDULA // FULL STACK // AI SPECIALIST //</span>
-          <span className="mr-8">VAISHNU VINDULA // FULL STACK // AI SPECIALIST //</span>
-        </div>
+  const text = 'VAISHNU VINDULA // FULL STACK // AI ENGINEER // ';
+  const repeated = text.repeat(6);
 
-        <div className="flex whitespace-nowrap font-heading font-black text-4xl md:text-7xl uppercase text-white/20 tracking-tighter animate-glitch-marquee [animation-direction:reverse]">
-          <span className="mr-8">CODEXVERSE // PROMPT PILOT // PRISMA // ANTIGRAVITY //</span>
-          <span className="mr-8">CODEXVERSE // PROMPT PILOT // PRISMA // ANTIGRAVITY //</span>
-          <span className="mr-8">CODEXVERSE // PROMPT PILOT // PRISMA // ANTIGRAVITY //</span>
+  return (
+    <section className="bg-white border-t border-[#121212]/10 py-16 overflow-hidden select-none">
+      {/* Row 1 — scrolls right */}
+      <div className="overflow-hidden mb-4">
+        <div
+          className="animate-ticker whitespace-nowrap"
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(2rem, 6vw, 5rem)',
+            letterSpacing: '-0.04em',
+            color: '#121212',
+          }}
+        >
+          <span>{repeated}</span>
+          <span>{repeated}</span>
         </div>
       </div>
 
-      {/* Central Manifesto Box */}
-      <div className="max-w-4xl mx-auto px-6 text-center mt-16 space-y-6">
-        <motion.p
-          initial={{ opacity: 0, scale: 0.95 }}
-          whileInView={{ opacity: 1, scale: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8 }}
-          className="text-2xl md:text-5xl font-heading font-bold text-[#F3F1EC] leading-tight"
+      {/* Row 2 — scrolls left, lighter */}
+      <div className="overflow-hidden mb-4">
+        <div
+          className="animate-ticker-rev whitespace-nowrap"
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(2rem, 6vw, 5rem)',
+            letterSpacing: '-0.04em',
+            color: 'transparent',
+            WebkitTextStroke: '1.5px #121212',
+          }}
         >
-          Building intelligent products for those ready to go beyond the ordinary.
-        </motion.p>
-        <span className="inline-block font-mono text-xs text-blue-400 uppercase tracking-widest">
-          // CONTINUOUS EVOLUTION & REFINEMENT
-        </span>
+          <span>{repeated}</span>
+          <span>{repeated}</span>
+        </div>
+      </div>
+
+      {/* Row 3 — scrolls right, muted */}
+      <div className="overflow-hidden">
+        <div
+          className="animate-ticker whitespace-nowrap"
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(2rem, 6vw, 5rem)',
+            letterSpacing: '-0.04em',
+            color: '#121212',
+            opacity: 0.08,
+          }}
+        >
+          <span>{repeated}</span>
+          <span>{repeated}</span>
+        </div>
       </div>
     </section>
   );

@@ -3,119 +3,149 @@ import { motion } from 'framer-motion';
 const projects = [
   {
     id: '01',
-    name: 'CODEXVERSE AI',
-    tagline: 'A Real-time Collaborative Code Editor & AI Platform.',
-    desc: 'Empowers multi-developer real-time pairing with built-in agentic AI assistants, instant code generation, and syntax intelligence.',
-    tags: ['React 19', 'AI Agents', 'WebSockets', 'Tailwind'],
+    name: 'CodeXVerse',
+    tagline: 'A real-time collaborative code editor with AI.',
     link: 'https://codexverse-eight.vercel.app',
-    featured: true,
+    year: '2025',
   },
   {
     id: '02',
-    name: 'PROMPT PILOT AI',
-    tagline: 'AI Prompt Engineering Suite & Visual Workflow Editor.',
-    desc: 'Streamlines complex prompt construction, dynamic LLM testing, and evaluation metrics for production AI systems.',
-    tags: ['Next.js', 'Python', 'Gemini API', 'TypeScript'],
+    name: 'Prompt Pilot',
+    tagline: 'AI prompt engineering suite & visual workflow.',
     link: 'https://github.com/vaishnuvindula',
-    featured: false,
+    year: '2025',
   },
   {
     id: '03',
-    name: 'PRISMA METRICS',
-    tagline: 'High-Throughput Analytics & Telemetry Dashboard.',
-    desc: 'Real-time interactive data visualization platform processing thousands of live events per second with instant graphs.',
-    tags: ['React', 'Three.js', 'WebGPU', 'Tailwind'],
+    name: 'Prisma Metrics',
+    tagline: 'High-throughput analytics & telemetry dashboard.',
     link: 'https://github.com/vaishnuvindula',
-    featured: false,
+    year: '2024',
   },
   {
     id: '04',
-    name: 'ANTIGRAVITY AGENTS',
-    tagline: 'Autonomous Multi-Agent Orchestration Engine.',
-    desc: 'Custom framework built on Google Antigravity SDK for autonomous task execution and complex codebase refactoring.',
-    tags: ['Python', 'AGY SDK', 'Node.js', 'Docker'],
+    name: 'Antigravity Agents',
+    tagline: 'Autonomous multi-agent orchestration engine.',
     link: 'https://github.com/vaishnuvindula',
-    featured: false,
+    year: '2026',
   },
 ];
 
 export function Works() {
   return (
-    <section id="works" className="py-24 px-6 md:px-12 bg-[#0D0D0D] border-b border-white/10">
+    <section id="works" className="bg-white py-24 px-6 md:px-12 border-t border-[#121212]/10">
       <div className="max-w-7xl mx-auto space-y-16">
-        {/* Animated WORKS Header */}
-        <div className="flex justify-between items-end border-b border-white/10 pb-8">
-          <div>
-            <span className="font-mono text-xs uppercase tracking-widest text-[#8E8D8A]">
-              ( SELECTED PROJECTS )
-            </span>
-            <h2 className="text-5xl md:text-8xl font-heading font-extrabold tracking-tighter text-[#F3F1EC] uppercase mt-2">
-              W O R K S
-            </h2>
-          </div>
-          <div className="hidden md:block font-mono text-xs text-right text-[#8E8D8A]">
-            <div>04 FEATURED PROJECTS</div>
-            <div>2024 — 2026</div>
+
+        {/* WORKS big word — exactly like noth.in */}
+        <div>
+          <span
+            className="text-[#121212] text-[11px] tracking-widest uppercase block mb-4"
+            style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+          >
+            ( Selected Projects )
+          </span>
+          <div
+            className="flex gap-2 md:gap-4 overflow-hidden"
+            style={{ fontFamily: "'Syne', sans-serif" }}
+          >
+            {'WORKS'.split('').map((letter, i) => (
+              <motion.span
+                key={i}
+                initial={{ y: '100%' }}
+                whileInView={{ y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.33, 1, 0.68, 1] }}
+                className="text-[#121212] inline-block"
+                style={{
+                  fontSize: 'clamp(4rem, 14vw, 12rem)',
+                  fontWeight: 900,
+                  lineHeight: 1,
+                  letterSpacing: '-0.04em',
+                }}
+              >
+                {letter}
+              </motion.span>
+            ))}
           </div>
         </div>
 
         {/* Subtitle */}
-        <p className="text-xl md:text-3xl font-light text-[#F3F1EC] max-w-2xl">
+        <h3
+          className="text-[#121212] max-w-2xl leading-snug"
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 700,
+            fontSize: 'clamp(1.4rem, 3vw, 2.2rem)',
+            letterSpacing: '-0.02em',
+          }}
+        >
           Good developers communicate.<br />
-          <span className="text-[#8E8D8A]">Great products surprise.</span>
-        </p>
+          Great products surprise.
+        </h3>
 
-        {/* Projects List */}
-        <div className="space-y-12">
-          {projects.map((project) => (
+        {/* Project list — noth.in style rows */}
+        <div>
+          {projects.map((project, i) => (
             <motion.div
               key={project.id}
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="group relative rounded-xl border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] p-8 transition-all duration-300 space-y-6"
+              transition={{ duration: 0.5, delay: i * 0.08 }}
             >
-              <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/5 pb-6">
-                <div className="flex items-baseline gap-4">
-                  <span className="font-mono text-xs text-[#8E8D8A]">{project.id}</span>
-                  <h3 className="text-2xl md:text-4xl font-heading font-bold text-white group-hover:text-blue-400 transition-colors">
-                    {project.name}
-                  </h3>
-                </div>
-
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="btn-editorial self-start md:self-auto cursor-pointer"
-                >
-                  <span>LAUNCH PROJECT</span>
-                  <span>↗</span>
-                </a>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-start">
-                <div className="md:col-span-2 space-y-2">
-                  <h4 className="text-lg font-medium text-white/90">{project.tagline}</h4>
-                  <p className="text-sm font-light text-[#8E8D8A] leading-relaxed">
-                    {project.desc}
-                  </p>
-                </div>
-
-                <div className="flex flex-wrap gap-2 md:justify-end">
-                  {project.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-3 py-1 rounded-full font-mono text-[11px] uppercase bg-white/5 border border-white/10 text-white/70"
+              <a
+                href={project.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col md:flex-row md:items-center justify-between py-8 border-t border-[#121212]/10 hover:bg-[#f5f5f5] -mx-4 px-4 transition-colors duration-200"
+              >
+                {/* Left: number + name + tagline */}
+                <div className="flex items-start md:items-center gap-6">
+                  <span
+                    className="text-[#121212]/30 text-[11px] pt-1"
+                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                  >
+                    {project.id}
+                  </span>
+                  <div>
+                    <h4
+                      className="text-[#121212] group-hover:translate-x-1 transition-transform duration-200"
+                      style={{
+                        fontFamily: "'Syne', sans-serif",
+                        fontWeight: 800,
+                        fontSize: 'clamp(1.5rem, 4vw, 3rem)',
+                        letterSpacing: '-0.03em',
+                        lineHeight: 1,
+                      }}
                     >
-                      {tag}
-                    </span>
-                  ))}
+                      {project.name}
+                    </h4>
+                    <p
+                      className="text-[#121212]/50 mt-1"
+                      style={{ fontFamily: "'IBM Plex Mono', monospace", fontSize: '0.8rem' }}
+                    >
+                      {project.tagline}
+                    </p>
+                  </div>
                 </div>
-              </div>
+
+                {/* Right: year + arrow */}
+                <div className="flex items-center gap-4 mt-4 md:mt-0">
+                  <span
+                    className="text-[#121212]/30 text-[11px]"
+                    style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+                  >
+                    {project.year}
+                  </span>
+                  <div className="w-8 h-8 rounded-full border border-[#121212]/20 flex items-center justify-center group-hover:bg-[#121212] group-hover:text-white transition-all duration-200">
+                    <span className="text-xs rotate-[-45deg] inline-block">→</span>
+                  </div>
+                </div>
+              </a>
             </motion.div>
           ))}
+          {/* Last border */}
+          <div className="border-t border-[#121212]/10" />
         </div>
       </div>
     </section>

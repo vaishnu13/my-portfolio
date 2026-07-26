@@ -2,101 +2,79 @@ import { motion } from 'framer-motion';
 
 export function Footer() {
   return (
-    <footer id="contact" className="pt-24 pb-12 px-6 md:px-12 bg-[#0D0D0D] text-[#F3F1EC]">
-      <div className="max-w-7xl mx-auto space-y-16">
-        {/* Top CTA Area */}
-        <div className="space-y-8">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="text-4xl md:text-7xl font-heading font-extrabold tracking-tight"
+    <footer id="contact" className="bg-white border-t border-[#121212]/10 pt-24 pb-8 px-6 md:px-12">
+      <div className="max-w-7xl mx-auto">
+
+        {/* Big headline */}
+        <motion.h2
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+          className="text-[#121212] leading-tight mb-12"
+          style={{
+            fontFamily: "'Syne', sans-serif",
+            fontWeight: 900,
+            fontSize: 'clamp(2.5rem, 7vw, 6rem)',
+            letterSpacing: '-0.04em',
+          }}
+        >
+          Let's start<br />from here.
+        </motion.h2>
+
+        {/* CTAs */}
+        <div className="flex flex-wrap gap-4 mb-20">
+          <a
+            href="mailto:vaishnuvindula@gmail.com"
+            className="btn-pill"
           >
-            Let's start<br />
-            <span className="text-[#8E8D8A]">something extraordinary.</span>
-          </motion.h2>
-
-          {/* Contact Action Buttons */}
-          <div className="flex flex-wrap gap-4 pt-4">
-            <a
-              href="mailto:vaishnuvindula@gmail.com"
-              className="btn-editorial bg-white text-black hover:bg-white/90 border-white cursor-pointer"
-            >
-              <span>DROP US AN EMAIL</span>
-              <span>@</span>
-            </a>
-            <a
-              href="https://linkedin.com/in/vaishnuvindula"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-editorial cursor-pointer"
-            >
-              <span>CONNECT ON LINKEDIN</span>
-              <span>↗</span>
-            </a>
-          </div>
+            <span>drop us an email</span>
+            <span>@</span>
+          </a>
+          <a
+            href="https://linkedin.com/in/vaishnuvindula"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-pill"
+          >
+            <span>connect on linkedin</span>
+            <span>↗</span>
+          </a>
         </div>
 
-        {/* Social Links Row */}
-        <div className="flex flex-wrap justify-between items-center gap-6 pt-12 border-t border-white/10 font-mono text-xs text-[#8E8D8A]">
-          <div className="flex items-center gap-6 uppercase">
-            <a
-              href="https://github.com/vaishnuvindula"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
-            >
-              GITHUB ↗
-            </a>
-            <a
-              href="https://linkedin.com/in/vaishnuvindula"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
-            >
-              LINKEDIN ↗
-            </a>
-            <a
-              href="https://codexverse-eight.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-white transition-colors"
-            >
-              CODEXVERSE ↗
-            </a>
-          </div>
-
-          <div>HYDERABAD, INDIA // AVAILABLE FOR GLOBAL REMOTE</div>
-        </div>
-
-        {/* Massive SVG Logo Banner at Footer */}
-        <div className="pt-8 border-t border-white/10">
+        {/* Massive SVG footer name — just like noth.in */}
+        <div className="border-t border-[#121212]/10 pt-8 -mx-6 md:-mx-12">
           <svg
-            viewBox="0 0 1400 220"
-            fill="none"
+            viewBox="0 0 1000 140"
+            preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto text-white/20 hover:text-white/40 transition-colors duration-500 select-none"
+            className="w-full h-auto"
           >
             <text
-              x="50%"
-              y="55%"
-              dominantBaseline="middle"
+              x="500"
+              y="115"
               textAnchor="middle"
-              fill="currentColor"
-              fontSize="155"
+              fill="#121212"
+              fontFamily="'Syne', sans-serif"
               fontWeight="900"
-              fontFamily="Syne, Plus Jakarta Sans, sans-serif"
-              letterSpacing="-0.04em"
+              fontSize="130"
+              letterSpacing="-6"
             >
               VAISHNU VINDULA
             </text>
           </svg>
         </div>
 
-        {/* Bottom Credits */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-4 font-mono text-[11px] text-[#8E8D8A]">
-          <div>©2026 — VAISHNU VINDULA. ALL RIGHTS RESERVED.</div>
-          <div>DESIGN & ARCHITECTURE INSPIRED BY NOTH.IN</div>
+        {/* Bottom credits bar */}
+        <div
+          className="flex flex-col md:flex-row justify-between items-center gap-2 mt-6 text-[#121212]/40 text-[10px]"
+          style={{ fontFamily: "'IBM Plex Mono', monospace" }}
+        >
+          <span>©2026 — VAISHNU VINDULA. ALL RIGHTS RESERVED.</span>
+          <div className="flex gap-4">
+            <a href="https://github.com/vaishnuvindula" target="_blank" rel="noopener noreferrer" className="hover:text-[#121212] transition-colors">GITHUB</a>
+            <a href="https://linkedin.com/in/vaishnuvindula" target="_blank" rel="noopener noreferrer" className="hover:text-[#121212] transition-colors">LINKEDIN</a>
+          </div>
         </div>
       </div>
     </footer>

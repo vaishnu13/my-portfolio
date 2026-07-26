@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Loader } from './components/Loader';
-import { Navbar } from './components/Navbar';
+import { MenuOverlay } from './components/MenuOverlay';
 import { Hero } from './components/Hero';
 import { Showreel } from './components/Showreel';
 import { Works } from './components/Works';
@@ -9,17 +9,21 @@ import { GlitchText } from './components/GlitchText';
 import { Footer } from './components/Footer';
 
 export default function App() {
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading]   = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   return (
-    <div className="bg-[#0D0D0D] text-[#F3F1EC] min-h-screen selection:bg-white selection:text-black">
-      {/* Interactive 000-100 Loading Curtain */}
+    <div className="bg-white text-[#121212] min-h-screen">
+
+      {/* Loader: pure black, V [shape] V, 000→100 counter */}
       {loading && <Loader onComplete={() => setLoading(false)} />}
 
-      {/* Main Editorial Content */}
-      <Navbar />
+      {/* Full-screen slide-down menu overlay */}
+      <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
+
+      {/* Main page — traditional vertical scroll */}
       <main>
-        <Hero />
+        <Hero onMenuClick={() => setMenuOpen(true)} />
         <Showreel />
         <Works />
         <About />

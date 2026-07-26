@@ -1,72 +1,105 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
-export function Loader({ onComplete }: { onComplete: () => void }) {
-  const [counter, setCounter] = useState(0);
-  const [isDone, setIsDone] = useState(false);
+interface LoaderProps {
+  onComplete: () => void;
+}
+
+export function Loader({ onComplete }: LoaderProps) {
+  const [count, setCount]   = useState(0);
+  const [exiting, setExiting] = useState(false);
 
   useEffect(() => {
-    const duration = 1800; // ms
-    const interval = 20;
-    const steps = duration / interval;
-    let step = 0;
+    // Count 000 → 100 in ~2 seconds
+    const total = 2000; // ms
+    const step  = 20;   // ms per tick
+    const ticks = total / step;
+    let current = 0;
 
-    const timer = setInterval(() => {
-      step++;
-      const progress = Math.min(Math.round((step / steps) * 100), 100);
-      setCounter(progress);
-
-      if (progress >= 100) {
-        clearInterval(timer);
+    const id = setInterval(() => {
+      current++;
+      setCount(Math.min(Math.round((current / ticks) * 100), 100));
+      if (current >= ticks) {
+        clearInterval(id);
         setTimeout(() => {
-          setIsDone(true);
-          setTimeout(onComplete, 600);
+          setExiting(true);
+          setTimeout(onComplete, 900);
         }, 300);
       }
-    }, interval);
+    }, step);
 
-    return () => clearInterval(timer);
+    return () => clearInterval(id);
   }, [onComplete]);
 
   return (
     <AnimatePresence>
-      {!isDone && (
+      {!exiting ? (
         <motion.div
-          exit={{ y: '-100%', transition: { duration: 0.8, ease: [0.76, 0, 0.24, 1] } }}
-          className="fixed inset-0 z-[999] flex flex-col justify-between p-8 bg-[#0D0D0D] text-[#F3F1EC] font-mono select-none"
+          key="loader"
+          className="loader"
+          exit={{ y: '-100%' }}
+          transition={{ duration: 0.85, ease: [0.76, 0, 0.24, 1] }}
         >
-          {/* Top Bar */}
-          <div className="flex justify-between items-center text-xs tracking-widest uppercase opacity-60">
-            <span>VAISHNU VINDULA</span>
-            <span>PORTFOLIO ©2026</span>
-          </div>
-
-          {/* Center Monogram / Statement */}
-          <div className="flex flex-col items-center justify-center space-y-4">
-            <motion.div
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ duration: 0.5 }}
-              className="text-6xl md:text-8xl font-extrabold tracking-tighter font-heading text-white"
+          {/* CENTER: V [shape] V — exactly like noth.in N [object] ' */}
+          <div className="flex items-center justify-center gap-6 select-none">
+            {/* Left letter */}
+            <span
+              className="text-white font-sans"
+              style={{
+                fontFamily: "'Syne', sans-serif",
+                fontSize: 'clamp(4rem, 10vw, 9rem)',
+                fontWeight: 900,
+                lineHeight: 1,
+                letterSpacing: '-0.04em',
+              }}
             >
-              VV
-            </motion.div>
-            <p className="text-xs uppercase tracking-widest text-[#8E8D8A]">
-              Full Stack & AI Engineer
-            </p>
+              V
+            </span>
+
+            {/* Center 3D metallic object — rotates */}
+            <div
+              className="shape-spin flex-shrink-0"
+              style={{ width: 'clamp(3rem, 8vw, 7rem)', height: 'clamp(3rem, 8vw, 7rem)' }}
+            >
+              <img
+                src="/loader-shape.jpg"
+                alt=""
+                className="w-full h-full object-contain"
+                style={{ mixBlendMode: 'screen' }}
+              />
+            </div>
+
+            {/* Right letter (apostrophe style) */}
+            <span
+              className="text-white font-sans"
+              style={{
+                fontFamily: "'Syne', sans-serif",
+                fontSize: 'clamp(2.5rem, 6vw, 5.5rem)',
+                fontWeight: 900,
+                lineHeight: 1,
+                letterSpacing: '-0.04em',
+                transform: 'skewX(-8deg)',
+                display: 'inline-block',
+                marginTop: '-1.5rem',
+              }}
+            >
+              V
+            </span>
           </div>
 
-          {/* Bottom Counter */}
-          <div className="flex justify-between items-end">
-            <div className="text-xs uppercase tracking-widest text-[#8E8D8A]">
-              <span>LOADING EXPERIENCE</span>
-            </div>
-            <div className="text-6xl md:text-8xl font-light font-heading tracking-tight">
-              {String(counter).padStart(3, '0')}
-            </div>
+          {/* BOTTOM: counter exactly like noth.in */}
+          <div
+            className="absolute bottom-8 left-1/2 -translate-x-1/2 text-white"
+            style={{
+              fontFamily: "'IBM Plex Mono', monospace",
+              fontSize: 'clamp(0.75rem, 1.5vw, 1rem)',
+              letterSpacing: '0.05em',
+            }}
+          >
+            {String(count).padStart(3, '0')}
           </div>
         </motion.div>
-      )}
+      ) : null}
     </AnimatePresence>
   );
 }
