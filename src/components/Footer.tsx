@@ -48,17 +48,18 @@ export function Footer() {
             viewBox="0 0 1000 140"
             preserveAspectRatio="xMidYMid meet"
             xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto"
+            className="w-full h-auto px-4"
           >
             <text
               x="500"
-              y="115"
+              y="110"
               textAnchor="middle"
+              textLength="960"
+              lengthAdjust="spacingAndGlyphs"
               fill="#121212"
               fontFamily="'Syne', sans-serif"
               fontWeight="900"
-              fontSize="130"
-              letterSpacing="-6"
+              fontSize="120"
             >
               VAISHNU VINDULA
             </text>

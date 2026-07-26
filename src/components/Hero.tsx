@@ -7,12 +7,12 @@ interface HeroProps {
 export function Hero({ onMenuClick }: HeroProps) {
   return (
     <section
-      className="relative min-h-screen bg-white flex flex-col overflow-hidden"
+      className="relative min-h-screen bg-white flex flex-col justify-between overflow-hidden"
       style={{ fontFamily: "'IBM Plex Mono', monospace" }}
     >
       {/* ── TOP BAR ── */}
       <div className="fixed top-0 left-0 right-0 z-50 flex justify-between items-start p-6 md:p-8 pointer-events-none">
-        {/* Top-left tagline — exactly like noth.in */}
+        {/* Top-left tagline */}
         <motion.div
           initial={{ opacity: 0, y: -10 }}
           animate={{ opacity: 1, y: 0 }}
@@ -51,60 +51,59 @@ export function Hero({ onMenuClick }: HeroProps) {
         </motion.button>
       </div>
 
-      {/* ── CENTER: MASSIVE NAME filling full width ── */}
-      <div className="flex-1 flex items-center px-0 pt-24 pb-16">
+      {/* ── CENTER: PERFECT MASSIVE BOLD NAME (No clipping) ── */}
+      <div className="flex-1 flex flex-col justify-center px-4 md:px-8 pt-24 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.1 }}
-          className="w-full"
+          className="w-full max-w-7xl mx-auto space-y-2 md:space-y-4"
         >
-          {/* 
-            Edge-to-edge massive bold text — same as "NOTHIN'" at noth.in.
-            Using SVG text to guarantee it fills the exact viewport width.
-          */}
-          <svg
-            viewBox="0 0 1000 200"
-            preserveAspectRatio="xMidYMid meet"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto block"
-            style={{ maxHeight: '40vh' }}
-          >
-            <text
-              x="500"
-              y="160"
-              textAnchor="middle"
-              fill="#121212"
-              fontFamily="'Syne', sans-serif"
-              fontWeight="900"
-              fontSize="165"
-              letterSpacing="-8"
-              style={{ fontKerning: 'none' }}
+          {/* Line 1: VAISHNU */}
+          <div className="w-full overflow-hidden">
+            <svg
+              viewBox="0 0 1000 160"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto block"
             >
-              VAISHNU
-            </text>
-          </svg>
-          <svg
-            viewBox="0 0 1000 200"
-            preserveAspectRatio="xMidYMid meet"
-            xmlns="http://www.w3.org/2000/svg"
-            className="w-full h-auto block -mt-4"
-            style={{ maxHeight: '40vh' }}
-          >
-            <text
-              x="500"
-              y="160"
-              textAnchor="middle"
-              fill="#121212"
-              fontFamily="'Syne', sans-serif"
-              fontWeight="900"
-              fontSize="165"
-              letterSpacing="-8"
-              style={{ fontKerning: 'none' }}
+              <text
+                x="500"
+                y="130"
+                textAnchor="middle"
+                textLength="960"
+                lengthAdjust="spacingAndGlyphs"
+                fill="#121212"
+                fontFamily="'Syne', sans-serif"
+                fontWeight="900"
+                fontSize="150"
+              >
+                VAISHNU
+              </text>
+            </svg>
+          </div>
+
+          {/* Line 2: VINDULA */}
+          <div className="w-full overflow-hidden">
+            <svg
+              viewBox="0 0 1000 160"
+              xmlns="http://www.w3.org/2000/svg"
+              className="w-full h-auto block"
             >
-              VINDULA
-            </text>
-          </svg>
+              <text
+                x="500"
+                y="130"
+                textAnchor="middle"
+                textLength="960"
+                lengthAdjust="spacingAndGlyphs"
+                fill="#121212"
+                fontFamily="'Syne', sans-serif"
+                fontWeight="900"
+                fontSize="150"
+              >
+                VINDULA
+              </text>
+            </svg>
+          </div>
         </motion.div>
       </div>
 
