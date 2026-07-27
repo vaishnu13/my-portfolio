@@ -11,12 +11,22 @@
    NOTH.IN EXACT DESIGN SYSTEM
    ============================================= */
 
-html, body {
+html {
   background-color: #ffffff;
   color: #121212;
   font-family: var(--font-mono);
   overflow-x: hidden;
-  overscroll-behavior: none;
+  overflow-y: auto;
+  min-height: 100%;
+}
+
+body {
+  background-color: #ffffff;
+  color: #121212;
+  font-family: var(--font-mono);
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100vh;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

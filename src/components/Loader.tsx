@@ -41,8 +41,8 @@ export function Loader({ onComplete }: LoaderProps) {
   }, [word2]);
 
   useEffect(() => {
-    const total = 2200; // ms
-    const step  = 20;   // ms per tick
+    const total = 1800; // Fast 1.8s load
+    const step  = 18;   // ms per tick
     const ticks = total / step;
     let current = 0;
 
@@ -55,8 +55,8 @@ export function Loader({ onComplete }: LoaderProps) {
         clearInterval(id);
         setTimeout(() => {
           setExiting(true);
-          setTimeout(onComplete, 900);
-        }, 400);
+          setTimeout(onComplete, 600);
+        }, 250);
       }
     }, step);
 
@@ -72,9 +72,10 @@ export function Loader({ onComplete }: LoaderProps) {
         <motion.div
           key="loader"
           initial={{ opacity: 1 }}
-          exit={{ opacity: 0, scale: 0.98 }}
-          transition={{ duration: 0.75, ease: [0.76, 0, 0.24, 1] }}
-          className="fixed inset-0 z-[9999] bg-[#0D0D0D] flex flex-col justify-between items-center p-8 select-none overflow-hidden"
+          exit={{ opacity: 0, transition: { duration: 0.5, ease: 'easeOut' } }}
+          className={`fixed inset-0 z-[9999] bg-[#0D0D0D] flex flex-col justify-between items-center p-8 select-none overflow-hidden ${
+            exiting ? 'pointer-events-none' : ''
+          }`}
         >
           {/* Top Label */}
           <div className="w-full flex justify-between items-center font-mono text-[11px] text-white/40 uppercase tracking-widest">
