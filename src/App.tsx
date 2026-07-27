@@ -9,6 +9,7 @@ import { Experience } from './components/Experience';
 import { About } from './components/About';
 import { GlitchText } from './components/GlitchText';
 import { Footer } from './components/Footer';
+import { LeadPopup } from './components/LeadPopup';
 
 export default function App() {
   const [loading, setLoading]   = useState(true);
@@ -18,6 +19,9 @@ export default function App() {
     <div className="bg-white text-[#121212] min-h-screen">
       {/* Loader: pure black, V [shape] V, 000→100 counter */}
       {loading && <Loader onComplete={() => setLoading(false)} />}
+
+      {/* 5-Second Visitor Lead Modal */}
+      <LeadPopup />
 
       {/* Full-screen menu overlay */}
       <MenuOverlay isOpen={menuOpen} onClose={() => setMenuOpen(false)} />
